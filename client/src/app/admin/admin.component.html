@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 <!--Tabs navigation-->
 
-<main class="p-2">
+<main class="p-2 flex flex-col lg:flex-row">
   <ul
-    class="mb-5 flex list-none flex-row flex-wrap border-b-0 pl-0"
+    class="mr-4 flex list-none flex-wrap basis-[10%] justify-between float-right border-b-0 pl-0 lg:h-[60vh]"
     role="tablist"
     data-te-nav-ref
   >
-    <li role="presentation" class="flex-auto text-center">
+    <li role="presentation" class="flex-grow text-center">
       <p
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
         data-te-toggle="pill"
@@ -20,7 +20,7 @@
         Tours
       </p>
     </li>
-    <li role="presentation" class="flex-auto text-center">
+    <li role="presentation" class="flex-grow text-center">
       <a
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
         data-te-toggle="pill"
@@ -31,7 +31,7 @@
         >Add Tours</a
       >
     </li>
-    <li role="presentation" class="flex-auto text-center">
+    <li role="presentation" class="flex-grow text-center">
       <p
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
         data-te-toggle="pill"
@@ -43,7 +43,7 @@
         Users
       </p>
     </li>
-    <li role="presentation" class="flex-auto text-center">
+    <li role="presentation" class="flex-grow text-center">
       <p
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
         data-te-toggle="pill"
@@ -55,7 +55,7 @@
         Bookings
       </p>
     </li>
-    <li role="presentation" class="flex-auto text-center">
+    <li role="presentation" class="flex-grow text-center">
       <p
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
         data-te-toggle="pill"
@@ -70,7 +70,7 @@
   </ul>
 
   <!--Tabs content-->
-  <div class="mb-6 p-2">
+  <div class="my-2 p-2 basis-[90%] float-left">
     <!-- tab 1 -->
     <div
       class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
@@ -80,7 +80,7 @@
       data-te-tab-active
     >
       <!-- Container for demo purpose -->
-      <div class="container my-12 py-12 mx-auto px-4 md:px-6 lg:px-12">
+      <div class="container my-3 py-3 mx-auto px-4 md:px-6 lg:px-12">
         <!--Section: Design Block-->
         <section class="mb-20 text-gray-800">
           <div class="block rounded-lg shadow-lg bg-white">
@@ -123,22 +123,53 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            <div
-                              class="relative mb-3"
-                              data-te-input-wrapper-init
+                            <img
+                              src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                              class="rounded-full"
+                              style="height: 100px; width: 100px"
+                              alt=""
+                              loading="lazy"
+                            />
+                          </td>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
+                          >
+                            The best of the best Content
+                          </td>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
+                          >
+                            Ksh 400
+                          </td>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
+                          >
+                            <a
+                              href="#!"
+                              class="font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out"
+                              data-te-toggle="modal"
+                              data-te-target="#ToursModalCenter"
+                              >Edit</a
                             >
-                              <input
-                                type="url"
-                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInputURL"
-                                placeholder="Example label"
-                              />
-                              <label
-                                for="exampleFormControlInputURL"
-                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                                >URL input
-                              </label>
-                            </div>
+                          </td>
+                        </tr>
+                        <tr class="border-b bg-gray-100">
+                          <th
+                            class="text-sm font-medium px-6 py-4 whitespace-nowrap text-left"
+                            scope="row"
+                          >
+                            Maasai Mara Lounge
+                          </th>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
+                          >
+                            <img
+                              src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                              class="rounded-full"
+                              style="height: 100px; width: 100px"
+                              alt=""
+                              loading="lazy"
+                            />
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
@@ -170,22 +201,13 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            <div
-                              class="relative mb-3"
-                              data-te-input-wrapper-init
-                            >
-                              <input
-                                type="url"
-                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInputURL"
-                                placeholder="Example label"
-                              />
-                              <label
-                                for="exampleFormControlInputURL"
-                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                                >URL input
-                              </label>
-                            </div>
+                            <img
+                              src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                              class="rounded-full"
+                              style="height: 100px; width: 100px"
+                              alt=""
+                              loading="lazy"
+                            />
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
@@ -217,22 +239,13 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            <div
-                              class="relative mb-3"
-                              data-te-input-wrapper-init
-                            >
-                              <input
-                                type="url"
-                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInputURL"
-                                placeholder="Example label"
-                              />
-                              <label
-                                for="exampleFormControlInputURL"
-                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                                >URL input
-                              </label>
-                            </div>
+                            <img
+                              src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                              class="rounded-full"
+                              style="height: 100px; width: 100px"
+                              alt=""
+                              loading="lazy"
+                            />
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
@@ -264,69 +277,13 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            <div
-                              class="relative mb-3"
-                              data-te-input-wrapper-init
-                            >
-                              <input
-                                type="url"
-                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInputURL"
-                                placeholder="Example label"
-                              />
-                              <label
-                                for="exampleFormControlInputURL"
-                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                                >URL input
-                              </label>
-                            </div>
-                          </td>
-                          <td
-                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
-                          >
-                            The best of the best Content
-                          </td>
-                          <td
-                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
-                          >
-                            Ksh 400
-                          </td>
-                          <td
-                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
-                          >
-                            <a
-                              href="#!"
-                              class="font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out"
-                              >Edit</a
-                            >
-                          </td>
-                        </tr>
-                        <tr class="border-b bg-gray-100">
-                          <th
-                            class="text-sm font-medium px-6 py-4 whitespace-nowrap text-left"
-                            scope="row"
-                          >
-                            Maasai Mara Lounge
-                          </th>
-                          <td
-                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
-                          >
-                            <div
-                              class="relative mb-3"
-                              data-te-input-wrapper-init
-                            >
-                              <input
-                                type="url"
-                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInputURL"
-                                placeholder="Example label"
-                              />
-                              <label
-                                for="exampleFormControlInputURL"
-                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                                >URL input
-                              </label>
-                            </div>
+                            <img
+                              src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                              class="rounded-full"
+                              style="height: 100px; width: 100px"
+                              alt=""
+                              loading="lazy"
+                            />
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
@@ -362,7 +319,7 @@
     </div>
     <!-- Tab 2 -->
     <div
-      class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:flex justify-center"
+      class="hidden opacity-0 py-3 transition-opacity duration-150 ease-linear data-[te-tab-active]:flex justify-center"
       id="tabs-profile01"
       role="tabpanel"
       aria-labelledby="tabs-profile-tab01"
@@ -449,7 +406,7 @@
       role="tabpanel"
       aria-labelledby="tabs-profile-tab01"
     >
-      <div class="container my-12 py-12 mx-auto px-4 md:px-6 lg:px-12">
+      <div class="container my-3 py-3 mx-auto px-4 md:px-6 lg:px-12">
         <!--Section: Design Block-->
         <section class="mb-20 text-gray-800">
           <div class="block rounded-lg shadow-lg bg-white">
@@ -805,7 +762,7 @@
       aria-labelledby="tabs-profile-tab01"
     >
       <!-- Container for demo purpose -->
-      <div class="container my-12 py-12 mx-auto px-4 md:px-6 lg:px-12">
+      <div class="container my-3 py-6 mx-auto px-4 md:px-6 lg:px-12">
         <!--Section: Design Block-->
         <section class="mb-20 text-gray-800">
           <div class="block rounded-lg shadow-lg bg-white">
@@ -826,10 +783,10 @@
                             Head Count
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                           Duration
+                            Duration
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                           Total Price
+                            Total Price
                           </th>
 
                           <th
@@ -849,12 +806,12 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                          5
+                            5
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                           5 days Starting 12/10/2023
+                            5 days Starting 12/10/2023
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
@@ -871,7 +828,6 @@
                             >
                           </td>
                         </tr>
-
                       </tbody>
                     </table>
                   </div>
@@ -891,7 +847,7 @@
       role="tabpanel"
       aria-labelledby="tabs-profile-tab01"
     >
-       <!-- Container for demo purpose -->
+      <!-- Container for demo purpose -->
       <div class="container my-12 py-12 mx-auto px-4 md:px-6 lg:px-12">
         <!--Section: Design Block-->
         <section class="mb-20 text-gray-800">
@@ -910,19 +866,14 @@
                             Tour Name
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                            Head Count
+                            review
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                           Duration
+                            End Date
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                           Total Price
+                            Review By:
                           </th>
-
-                          <th
-                            scope="col"
-                            class="rounded-tr-lg text-sm font-medium px-6 py-4"
-                          ></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -936,29 +887,25 @@
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                          5
+                            Lorem ipsum dolor sit amet consectetur <br />
+                            adipisicing elit. Omnis modi, amet, <br />
+                            nemo autem tempore inventore vel exercitationem
+                            <br />
+                            nulla reprehenderit suscipit, accusantium pariatur
+                            <br />quis. Non cupiditate ex natus <br />doloribus
+                            quas numquam.
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                           5 days Starting 12/10/2023
+                            12/10/2023
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            Ksh 400
-                          </td>
-                          <td
-                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
-                          >
-                            <a
-                              href="#!"
-                              class="font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out"
-                              >Edit</a
-                            >
+                            Clare Bris
                           </td>
                         </tr>
-
                       </tbody>
                     </table>
                   </div>
@@ -973,3 +920,136 @@
     </div>
   </div>
 </main>
+
+<!-- Tours modal  -->
+
+<div
+  data-te-modal-init
+  class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+  id="ToursModalCenter"
+  tabindex="-1"
+  aria-labelledby="ToursModalCenterTitle"
+  aria-modal="true"
+  role="dialog"
+>
+  <div
+    data-te-modal-dialog-ref
+    class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]"
+  >
+    <div
+      class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600"
+    >
+      <div
+        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50"
+      >
+        <!--Modal title-->
+        <h5
+          class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+          id="exampleModalCenterTitle"
+        >
+          Edit Tour:
+        </h5>
+        <!--Close button-->
+        <button
+          type="button"
+          class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+          data-te-modal-dismiss
+          aria-label="Close"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!--Modal body-->
+      <div class="relative p-4">
+        <form>
+          <!--Tour Name input-->
+          <div class="relative mb-6" data-te-input-wrapper-init>
+            <input
+              type="text"
+              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="exampleInput8"
+              placeholder="Tour Name"
+            />
+            <label
+              for="exampleInput8"
+              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+              >Tour Name
+            </label>
+          </div>
+
+          <!--Description textarea-->
+          <div class="relative mb-6" data-te-input-wrapper-init>
+            <textarea
+              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="exampleFormControlTextarea13"
+              rows="3"
+              placeholder="Description"
+            ></textarea>
+            <label
+              for="exampleFormControlTextarea13"
+              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+              >Description
+            </label>
+          </div>
+
+          <!--Image input-->
+          <div class="relative mb-6" data-te-input-wrapper-init>
+            <input
+              type="url"
+              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="exampleFormControlInputURL"
+              placeholder="Example label"
+            />
+            <label
+              for="exampleFormControlInputURL"
+              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+              >Image Url
+            </label>
+          </div>
+          <!-- price input -->
+          <div class="relative mb-3" data-te-input-wrapper-init>
+            <input
+              type="number"
+              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="exampleFormControlInputNumber"
+              placeholder="Example label"
+            />
+            <label
+              for="exampleFormControlInputNumber"
+              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+              >Price
+            </label>
+          </div>
+
+          <!--Submit button-->
+          <div
+            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50"
+          >
+            <button
+              type="submit"
+              class="dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]] inline-block w-full rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+              data-te-ripple-init
+              data-te-ripple-color="light"
+            >
+              update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

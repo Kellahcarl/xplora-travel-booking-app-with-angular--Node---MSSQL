@@ -8,6 +8,6 @@ import { Modal, Ripple, initTE, Tab, Input } from 'tw-elements';
 })
 export class AdminComponent {
   ngOnInit() {
-    initTE({ Tab, Input });
+    initTE({ Tab, Input ,Modal ,Ripple});
   }
 }

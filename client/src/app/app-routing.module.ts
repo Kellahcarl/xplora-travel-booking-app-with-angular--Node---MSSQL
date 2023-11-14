@@ -11,14 +11,14 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'user', component: UserComponent },
   { path: 'admin', component: AdminComponent },
-  {path:'profile', component : ProfileComponent},
-  {path: '**',component : NotFoundComponent}
-
+  { path: 'profile', component: ProfileComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
