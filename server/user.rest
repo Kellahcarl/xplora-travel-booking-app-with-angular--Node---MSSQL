@@ -1,26 +1,26 @@
 ####regester user
-post http://localhost:3550/user/register
+post http://localhost:4000/user/register
 Content-Type: application/json
 
 {
-    "username": "sylvia",
-    "email":"silvia3@thejitu.com",
+    "fullName": "sylvia Mogutu",
+    "email":"silvia9@thejitu.com",
     "password": "@Sylvia433"
 }
 
 #####get all users
 
-get http://localhost:3550/user
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhM0B0aGVqaXR1LmNvbSIsImlkIjoiZTE4NjNmMDYtODNhMi00ZDU0LTk0NzgtZmQxYzgxNGFkMTU2IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY5OTI1MjUzOCwiZXhwIjoxNjk5MzM4OTM4fQ.VjOTvnG_ftPyvbrUnGmYpyByKqwP1gr8iM-6hbYXVM4
+get http://localhost:4000/user
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
 
 
 #####get one user by id
-get http://localhost:3550/user/bb65d1dd-6402-497c-9a6f-9d43323c2302
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhMUB0aGVqaXR1LmNvbSIsImlkIjoiNjRiM2UyZjItZjZmMC00YmVmLWJjNmUtMmY1NTkwYTEzNTI5IiwiaWF0IjoxNjk4ODYwMDE4LCJleHAiOjE2OTg5NDY0MTh9.40W972ecnaDLlA7XJXlue27c2MmPlU0xDcHdnahDlPg
+get http://localhost:4000/user/1fc3bc90-dc27-41f8-9080-e1ced7a8362e
+token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
 
 ####login user
 
-post http://localhost:3550/user/login
+post http://localhost:4000/user/login
 Content-Type: application/json
 
 {
@@ -30,27 +30,38 @@ Content-Type: application/json
 }
 #####update user
 
-put http://localhost:3550/user
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhMUB0aGVqaXR1LmNvbSIsImlkIjoiNjRiM2UyZjItZjZmMC00YmVmLWJjNmUtMmY1NTkwYTEzNTI5IiwiaWF0IjoxNjk4ODYwMDE4LCJleHAiOjE2OTg5NDY0MTh9.40W972ecnaDLlA7XJXlue27c2MmPlU0xDcHdnahDlPg
+put http://localhost:4000/user
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
 Content-Type: application/json
 
 {
-    "id":"bb65d1dd-6402-497c-9a6f-9d43323c2302",
-    "username": "mogutu",
-    "email":"mogutu@thejitu.com"    
-    
+    "id":"1fc3bc90-dc27-41f8-9080-e1ced7a8362e",
+    "fullName": "mogutu",
+    "email":"mogutu@thejitu.com"
 }
 
 
 ##### delete user by ID
-delete http://localhost:3550/user/bb65d1dd-6402-497c-9a6f-9d43323c2302
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhMUB0aGVqaXR1LmNvbSIsImlkIjoiNjRiM2UyZjItZjZmMC00YmVmLWJjNmUtMmY1NTkwYTEzNTI5IiwiaWF0IjoxNjk4ODYwMDE4LCJleHAiOjE2OTg5NDY0MTh9.40W972ecnaDLlA7XJXlue27c2MmPlU0xDcHdnahDlPg
+delete http://localhost:4000/user/1fc3bc90-dc27-41f8-9080-e1ced7a8362e
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
 
-###
-get http://localhost:3550/user/check_user_details
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhM0B0aGVqaXR1LmNvbSIsImlkIjoiZTE4NjNmMDYtODNhMi00ZDU0LTk0NzgtZmQxYzgxNGFkMTU2IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY5OTI1MjUzOCwiZXhwIjoxNjk5MzM4OTM4fQ.VjOTvnG_ftPyvbrUnGmYpyByKqwP1gr8iM-6hbYXVM4
+### check user details
+get http://localhost:4000/user/check_user_details
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
 
-#####
+#### forgot password
+post http://localhost:4000/user/forgot
+Content-Type: application/json
 
-get http://localhost:3550/user/unassigned
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN5bHZpYSIsImVtYWlsIjoic2lsdmlhM0B0aGVqaXR1LmNvbSIsImlkIjoiZTE4NjNmMDYtODNhMi00ZDU0LTk0NzgtZmQxYzgxNGFkMTU2IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY5OTI1MjUzOCwiZXhwIjoxNjk5MzM4OTM4fQ.VjOTvnG_ftPyvbrUnGmYpyByKqwP1gr8iM-6hbYXVM4
+{
+    "email":"silvia4@thejitu.com"
+}
+
+##### reset password
+post http://localhost:4000/user/reset
+Content-Type: application/json
+
+{
+    "id" : "15b33325-2afb-47cb-8c3c-b216eab706c7",
+    "password" : "@Qwerty123"
+}

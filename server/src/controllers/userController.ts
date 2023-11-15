@@ -8,7 +8,9 @@ import { generateToken } from "../services/tokenGenerator";
 import {
   validateLoginUser,
   validateRegisterUser,
+  validateResetpassword,
   validateUpdateuser,
+  validateUserEmail,
   validateuserId,
 } from "../validators/userValidator";
 import { comparePass, hashPass } from "../services/passwordHash";
@@ -39,7 +41,7 @@ export const getUser = async (req: Request, res: Response) => {
     const procedureName = "getUserById";
     const result = await execute(procedureName, { id });
 
-    res.json(result.recordset);
+    res.json(result.recordset[0]);
   } catch (error) {
     console.log(error);
   }
@@ -47,9 +49,9 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { username, password, email } = req.body;
+    const { fullName, password, email } = req.body;
 
-    console.log(req.body);
+    // console.log(email);
 
     const { error } = validateRegisterUser.validate(req.body);
 
@@ -65,6 +67,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const result = await execute(procedure1, { email });
 
     const userWithEmail = result.recordset[0];
+    console.log(userWithEmail);
 
     if (userWithEmail)
       return res
@@ -73,11 +76,9 @@ export const registerUser = async (req: Request, res: Response) => {
 
     const newUser: user = {
       id: uuidv4(),
-      username,
+      fullName,
       email,
       password: newPassword,
-      isdeleted: false,
-      isAdmin: false,
     };
 
     const procedureName = "registerUser";
@@ -125,7 +126,7 @@ export const loginUser = async (req: Request, res: Response) => {
       const token = generateToken(
         user.email,
         user._id,
-        user.username,
+        user.fullName,
         user.isAdmin
       );
       return res.send({
@@ -142,17 +143,17 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { id, username, email } = req.body;
+    const { id, fullName, email } = req.body;
 
     const { error } = validateUpdateuser.validate(req.body);
     if (error)
       return res
         .status(400)
-        .send({ success: false, message: error.details[0].message });
+        .send({ error: "check full name & email if they are correct" });
 
     const newUser: updatUser = {
       id,
-      username,
+      fullName,
       email,
     };
 
@@ -179,10 +180,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     const { error } = validateuserId.validate(req.params);
 
-    if (error)
-      return res
-        .status(400)
-        .send({ success: false, message: error.details[0].message });
+    if (error) return res.status(400).send({ error: "enter a valid id" });
 
     const procedureName = "deleteUser";
     await execute(procedureName, { id });
@@ -193,21 +191,82 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export const getUnAssignedUser = async (req: Request, res: Response) => {
+export const forgotPassword = async (req: Request, res: Response) => {
   try {
-    // console.log(id);
+    const { email } = req.body;
 
-    const procedureName = "getUnassignedUser";
-    const result = await query(`EXEC ${procedureName}`);
+    if (!email) return res.status(400).send({ message: "email is required" });
 
-    res.json(result.recordset);
+    const { error } = validateUserEmail.validate(req.body);
+
+    if (error) {
+      return res.status(400).send({ error: "enter a valid email" });
+    }
+
+    const procedure1 = "getUserByEmail";
+    const result = await execute(procedure1, { email });
+
+    const userWithEmail = result.recordset[0];
+
+    if (!userWithEmail)
+      return res.status(404).send({ error: "Invalid Email Provided " });
+
+    const procedureName = "forgotPassword";
+    await execute(procedureName, { id: userWithEmail._id });
+
+    res
+      .status(201)
+      .send({ message: "check your email for a password reset link" });
   } catch (error) {
     console.log(error);
+    res.send({ error: (error as Error).message });
   }
 };
 
-export const resetPassword = async () => {};
-export const forgotPassword = async () => {};
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { id, password } = req.body;
+
+    if (!id) return res.status(400).send({ message: "id is required" });
+    if (!password)
+      return res.status(400).send({ message: "password is required" });
+
+    const { error } = validateResetpassword.validate(req.body);
+
+    if (error) {
+      return res.status(400).send({
+        error:
+          "check correct Email or password should be atleast 8 characters long with letters symbols and uppercase",
+      });
+    }
+
+    const procedure1 = "getUserById";
+    const result = await execute(procedure1, { id });
+
+    const userWithId = result.recordset[0];
+
+    if (!userWithId)
+      return res
+        .status(404)
+        .send({ error: "There is no such User with that id" });
+
+    const newPassword = await hashPass(password);
+
+    const params = {
+      id: userWithId._id,
+      password: newPassword,
+    };
+
+    const procedureName = "resetPassword";
+
+    await execute(procedureName, params);
+
+    res.send({ message: "Password Updated succesfully" });
+  } catch (error) {
+    console.log(error);
+    res.send({ error: (error as Error).message });
+  }
+};
 
 export const checkUserDetails = async (request: any, res: Response) => {
   // console.log("checking details");

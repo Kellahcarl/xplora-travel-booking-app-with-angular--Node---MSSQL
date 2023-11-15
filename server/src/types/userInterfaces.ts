@@ -1,12 +1,10 @@
 export interface updatUser {
   id: string;
-  username: string;
+  fullName: string;
   email: string;
 }
 export interface user extends updatUser {
   password: string;
-  isdeleted: boolean;
-  isAdmin: boolean;
 }
 
 export interface ExtendedUser extends Request {
@@ -15,6 +13,6 @@ export interface ExtendedUser extends Request {
 
 export interface checkDetailsUser {
   _id: string;
-  username: string;
+  fullname: string;
   email: string;
 }

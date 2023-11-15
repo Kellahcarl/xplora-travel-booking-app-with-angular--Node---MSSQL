@@ -1,11 +1,13 @@
+CREATE DATABASE XPLORA
+
 CREATE  TABLE users (
 	_id varchar(100) NOT NULL PRIMARY KEY,
-	username varchar(100) NOT NULL,
-	
+	fullName varchar(100) NOT NULL,	
 	email varchar(250) NOT NULL,
-	
-	isDeleted BIT ,
-	isAdmin Bit not null,
+	imageUrl varchar(250),	
+	isDeleted BIT Default 0,
+	isAdmin Bit Default 0,
+	resetPassword Bit default 0,
 	password varchar(250) NOT NULL,
 )
 

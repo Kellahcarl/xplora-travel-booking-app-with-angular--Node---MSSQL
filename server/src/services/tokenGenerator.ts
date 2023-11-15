@@ -9,12 +9,12 @@ const secretKey = process.env.SECRET_KEY as string;
 export const generateToken = (
   email: string,
   id: string,
-  username: string,
+  fullName: string,
   isAdmin: boolean
 ): string => {
   return jwt.sign(
     {
-      username,
+      fullName,
       email,
       id,
       isAdmin,

@@ -1,16 +1,16 @@
 CREATE OR ALTER PROCEDURE [dbo].[getUserByEmail]
-	@email	varchar(250)
+	(@email varchar(250))
 as
 
 set nocount on;
 
 begin
-	select	u.[_id],
-			u.email,
-			u.username,
-			u.isAdmin,
-			u.password
-	from	[users] u where email = @email and isDeleted = 0;
+	select	_id,
+			email,
+			fullName,
+			isAdmin,
+			password
+	FROM	users  WHERE email = @email AND isDeleted = 0;
 end;
 
-exec getUserByEmail
+EXEC getUserByEmail @email = 'caleb@thejitu.com';
