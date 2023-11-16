@@ -12,6 +12,7 @@ import user_router from "./routes/userRouter";
 
 import tour_router from "./routes/toursRouter";
 import booking_router from "./routes/bookingRouter";
+import review_router from "./routes/reviewRouter";
 
 dotenv.config();
 
@@ -22,7 +23,8 @@ app.use(cors());
 
 app.use("/user", user_router);
 app.use("/tour", tour_router);
-app.use("booking",booking_router)
+app.use("/booking", booking_router);
+app.use("/review", review_router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.json({

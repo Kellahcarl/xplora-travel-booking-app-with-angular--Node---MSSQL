@@ -1,4 +1,4 @@
-CREATE PROCEDURE getBookings
+CREATE or alter PROCEDURE getBookings
 AS
 BEGIN
     SELECT

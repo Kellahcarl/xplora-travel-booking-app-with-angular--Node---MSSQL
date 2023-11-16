@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { verifyToken } from "../middleware/verifyToken";
-import { createBooking, deleteBooking, getBooking, getBookings, updateBooking } from "../controllers/bookingController";
-
+import {
+  createBooking,
+  deleteBooking,
+  getBooking,
+  getBookings,
+  updateBooking,
+} from "../controllers/bookingController";
 
 const booking_router = Router();
 
