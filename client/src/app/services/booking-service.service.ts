@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CreateBooking, UpdateBooking } from '../interfaces/bookingInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class BookingServiceService {
 
   private apiUrl = 'http://localhost:4000/booking';
 
-  async createBooking(bookingDetails: any, token: string): Promise<any> {
+  async createBooking(bookingDetails: CreateBooking, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}/`, {
       method: 'POST',
       headers: {
@@ -43,7 +44,7 @@ export class BookingServiceService {
     return await response.json();
   }
 
-  async updateBooking(bookingDetails: any, token: string): Promise<any> {
+  async updateBooking(bookingDetails: UpdateBooking, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',
       headers: {

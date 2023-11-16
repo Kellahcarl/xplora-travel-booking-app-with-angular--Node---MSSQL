@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CreateTour, UpdateTour } from '../interfaces/toursInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class TourServiceService {
 
   private apiUrl = 'http://localhost:4000/tour';
 
-  async createTour(tourDetails: any, token: string): Promise<any> {
+  async createTour(tourDetails: CreateTour, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}/`, {
       method: 'POST',
       headers: {
@@ -43,7 +44,7 @@ export class TourServiceService {
     return await response.json();
   }
 
-  async updateTour(tourDetails: any, token: string): Promise<any> {
+  async updateTour(tourDetails: UpdateTour, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',
       headers: {

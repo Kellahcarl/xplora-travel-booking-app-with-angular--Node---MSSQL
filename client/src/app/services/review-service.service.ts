@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CreateReview, UpdateReview } from '../interfaces/reviewInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class ReviewServiceService {
 
   private apiUrl = 'http://localhost:4000/review';
 
-  async createReview(reviewDetails: any, token: string): Promise<any> {
+  async createReview(reviewDetails: CreateReview, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}/`, {
       method: 'POST',
       headers: {
@@ -43,7 +44,7 @@ export class ReviewServiceService {
     return await response.json();
   }
 
-  async updateReview(reviewDetails: any, token: string): Promise<any> {
+  async updateReview(reviewDetails: UpdateReview, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',
       headers: {
