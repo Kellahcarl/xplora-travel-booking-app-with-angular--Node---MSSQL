@@ -1,5 +1,5 @@
 CREATE  TABLE bookings (
-	book_id varchar(100) NOT NULL PRIMARY KEY,
+	booking_id varchar(100) NOT NULL PRIMARY KEY,
 	tour_id varchar(100) NOT NULL ,
 	user_id varchar(100) NOT NULL,
 	count int not null,
@@ -10,3 +10,5 @@ CREATE  TABLE bookings (
 	FOREIGN KEY (tour_id) REFERENCES tours(tour_id),
 	FOREIGN KEY (user_id) REFERENCES users(_id)
 )
+
+Drop Table bookings
