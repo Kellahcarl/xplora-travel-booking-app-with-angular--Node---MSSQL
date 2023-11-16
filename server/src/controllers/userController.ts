@@ -51,7 +51,7 @@ export const registerUser = async (req: Request, res: Response) => {
   try {
     const { fullName, password, email } = req.body;
 
-    // console.log(email);
+    // console.log(req.body);
 
     const { error } = validateRegisterUser.validate(req.body);
 
