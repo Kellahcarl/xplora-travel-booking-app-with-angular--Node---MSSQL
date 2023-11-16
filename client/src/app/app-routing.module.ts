@@ -8,9 +8,10 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },

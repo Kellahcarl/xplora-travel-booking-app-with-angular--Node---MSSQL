@@ -1,0 +1,44 @@
+####create a tour
+post http://localhost:4000/tour/
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+Content-Type: application/json
+
+{
+    "tour_name":"Chania falls",
+     "tour_description" : "see the waterfront",
+      "tour_img" :"skadgfbewf",
+       "price" : "40000", 
+       "start_date": "12/11/2023",
+        "end_date" : "12/11/2023"
+}
+
+#####get all tours
+
+get http://localhost:4000/tour/
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+
+
+#####get one tour by id
+get http://localhost:4000/tour/c6c05891-5304-4b0d-abba-57ec0f199240
+token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+
+#####update user
+
+put http://localhost:4000/tour
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+Content-Type: application/json
+
+{
+    "tour_id" : "c6c05891-5304-4b0d-abba-57ec0f199240" ,
+      "tour_name": "mount kenya",
+      "tour_description" : "see the mountain",
+      "tour_img":" here is the pic",
+      "price" : "30000",
+      "start_date" : "12/11/2023",
+      "end_date" : "12/11/2023"
+}
+
+
+##### delete tour by ID
+delete http://localhost:4000/tour/6c9e9747-2e0f-45ca-9aa9-9e9c04b29cae
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs

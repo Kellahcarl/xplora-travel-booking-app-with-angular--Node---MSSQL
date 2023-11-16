@@ -94,7 +94,7 @@ export const deleteTour = async (req: Request, res: Response) => {
     const procedureName = "deleteTour";
     await execute(procedureName, { tour_id });
 
-    res.status(201).send({ message: "Project deleted Successfully" });
+    res.status(201).send({ message: "Tour deleted Successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -107,7 +107,7 @@ export const deleteTour = async (req: Request, res: Response) => {
 export const getTour = async (req: Request, res: Response) => {
   try {
     const tour_id = req.params.tour_id;
-    // console.log(id);
+    // console.log(tour_id);
     if (!tour_id) return res.status(400).send({ message: "Id is required" });
 
     const { error } = validateTourId.validate(req.params);

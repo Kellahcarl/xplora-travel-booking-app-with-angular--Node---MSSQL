@@ -1,0 +1,116 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserServiceService {
+  constructor() {}
+
+  private apiUrl = 'http://localhost:4000/user';
+
+
+  async registerUser(userDetails: any): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userDetails),
+    });
+
+    return await response.json();
+  }
+
+  async getAllUsers(token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return await response.json();
+  }
+
+  async getUserById(userId: string, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/${userId}`, {
+      method: 'GET',
+      headers: {
+        token : token ,
+      },
+    });
+
+    return await response.json();
+  }
+
+  async loginUser(credentials: any): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    return await response.json();
+  }
+
+  async updateUser(userDetails: any, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        token : token,
+      },
+      body: JSON.stringify(userDetails),
+    });
+
+    return await response.json();
+  }
+
+  async deleteUserById(userId: string, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        token: token,
+      },
+    });
+
+    return await response.json();
+  }
+
+  async checkUserDetails(token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/check_user_details`, {
+      method: 'GET',
+      headers: {
+        token : token,
+      },
+    });
+
+    return await response.json();
+  }
+
+  async forgotPassword(email: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/forgot`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    return await response.json();
+  }
+
+  async resetPassword(resetDetails: any): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/reset`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(resetDetails),
+    });
+
+    return await response.json();
+  }
+}

@@ -1,5 +1,5 @@
-CREATE or alter PROCEDURE GetReviewDetails
-    @reviewId varchar(100)
+CREATE or alter PROCEDURE GetReviewById
+    @review_id varchar(100)
 AS
 BEGIN
     SELECT
@@ -25,6 +25,6 @@ BEGIN
     INNER JOIN
         tours t ON r.tour_id = t.tour_id
     WHERE
-        r.review_id = @reviewId
+        r.review_id = @review_id
         AND r.isDeleted = 0; -- Exclude deleted reviews if any
 END;

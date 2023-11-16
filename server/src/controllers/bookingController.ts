@@ -33,7 +33,7 @@ export const createBooking = async (req: Request, res: Response) => {
     const params = newBooking;
 
     await execute(procedure, params);
-    return res.send({ message: "Tour created successfully" });
+    return res.send({ message: "Booking created successfully" });
   } catch (error) {
     console.log(error);
     res.send((error as Error).message);
@@ -52,6 +52,8 @@ export const updateBooking = async (req: Request, res: Response) => {
     } = req.body;
 
     const { error } = validateUpdateBooking.validate(req.body);
+    console.log(error);
+    
     if (error)
       return res.status(400).send({ message: "please put correct details" });
 
@@ -94,7 +96,7 @@ export const deleteBooking = async (req: Request, res: Response) => {
     const procedureName = "deleteBooking";
     await execute(procedureName, { booking_id });
 
-    res.status(201).send({ message: "Project deleted Successfully" });
+    res.status(201).send({ message: "booking deleted Successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -128,7 +130,7 @@ export const getBooking = async (req: Request, res: Response) => {
 };
 export const getBookings = async (req: Request, res: Response) => {
   try {
-    const procedureName = "getBooking";
+    const procedureName = "getBookings";
     const result = await query(`EXEC ${procedureName}`);
     // console.log(result.recordset);
 
