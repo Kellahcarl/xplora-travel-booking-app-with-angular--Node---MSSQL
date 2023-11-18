@@ -573,7 +573,7 @@
                             review
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                            End Date
+                            Tour End Date
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
                             Review By:
@@ -581,33 +581,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="border-b bg-gray-100">
+                        <tr class="border-b bg-gray-100" *ngFor="let review of reviews">
                           <th
                             class="text-sm font-medium px-6 py-4 whitespace-nowrap text-left"
                             scope="row"
                           >
-                            Maasai Mara Lounge
+                            {{review.tour_name}}
                           </th>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            Lorem ipsum dolor sit amet consectetur <br />
-                            adipisicing elit. Omnis modi, amet, <br />
-                            nemo autem tempore inventore vel exercitationem
-                            <br />
-                            nulla reprehenderit suscipit, accusantium pariatur
-                            <br />quis. Non cupiditate ex natus <br />doloribus
-                            quas numquam.
+                            {{review.review_content}}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            12/10/2023
+                           {{review.tour_end_date |date}}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            Clare Bris
+                            {{review.userEmail}}
                           </td>
                         </tr>
                       </tbody>

@@ -6,6 +6,7 @@ import { TourServiceService } from '../services/tour-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from '../services/user-service.service';
 import { BookingServiceService } from '../services/booking-service.service';
+import { ReviewServiceService } from '../services/review-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -17,6 +18,7 @@ export class AdminComponent {
   tours: any[] = [];
   users: any[] = [];
   bookings: any[] = [];
+  reviews: any[] = [];
 
   ngOnInit() {
     initTE({ Tab, Input, Modal, Ripple, Datepicker });
@@ -25,6 +27,7 @@ export class AdminComponent {
     this.fetchTours();
     this.fetchUsers();
     this.fetchBookings();
+    this.fetchReviews();
   }
 
   token = localStorage.getItem('token');
@@ -32,6 +35,7 @@ export class AdminComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private reviewService: ReviewServiceService,
     private tourService: TourServiceService,
     private userService: UserServiceService,
     private bookingService: BookingServiceService
@@ -130,13 +134,24 @@ export class AdminComponent {
     }
     try {
       this.bookings = await this.bookingService.getAllBookings(this.token);
-      console.log(this.bookings);
+      // console.log(this.bookings);
     } catch (error) {
       console.error(error);
     }
   };
 
-  fetchReviews = async () => {};
+  fetchReviews = async () => {
+    if (!this.token) {
+      console.error('Token not found.');
+      return;
+    }
+    try {
+      this.reviews = await this.reviewService.getAllReviews(this.token);
+      console.log(this.reviews);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   fetchUsers = async () => {
     if (!this.token) {
