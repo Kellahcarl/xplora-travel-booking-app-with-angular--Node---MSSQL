@@ -10,6 +10,8 @@ export class TourServiceService {
   private apiUrl = 'http://localhost:4000/tour';
 
   async createTour(tourDetails: CreateTour, token: string): Promise<any> {
+    console.log(tourDetails);
+
     const response = await fetch(`${this.apiUrl}/`, {
       method: 'POST',
       headers: {

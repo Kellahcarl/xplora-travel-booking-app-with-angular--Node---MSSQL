@@ -14,10 +14,14 @@ export const createTour = async (req: Request, res: Response) => {
 
     const { error } = validateTour.validate(req.body);
 
+    // console.log(error);
+    
+
     if (error)
+      
       return res
         .status(400)
-        .send({ success: false, message: "please place correct details" });
+        .send({ error: "please place correct details" });
 
     const newTour: Tour = {
       tour_id: uuidv4(),
