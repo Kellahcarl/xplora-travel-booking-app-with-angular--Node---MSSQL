@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TourServiceService } from '../services/tour-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,12 +14,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AdminComponent {
   addTourForm: FormGroup;
   tours: any[] = [];
+  users: any[] = [];
 
   ngOnInit() {
     initTE({ Tab, Input, Modal, Ripple, Datepicker });
     this.initForm();
 
     this.fetchTours();
+    this.fetchUsers();
   }
 
   token = localStorage.getItem('token');
@@ -26,7 +29,8 @@ export class AdminComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private tourService: TourServiceService
+    private tourService: TourServiceService,
+    private userService: UserServiceService
   ) {
     if (!this.isAuthenticated()) {
       this.router.navigate(['login']);
@@ -119,7 +123,19 @@ export class AdminComponent {
 
   fetchReviews = async () => {};
 
-  fetchUsers = async () => {};
+  async fetchUsers() {
+    if (!this.token) {
+      console.error('Token not found.');
+      return;
+    }
+
+    try {
+      this.users = await this.userService.getAllUsers(this.token);
+      console.log(this.users);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async deleteTour(tour_id: string) {
     try {
@@ -142,7 +158,6 @@ export class AdminComponent {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-
             if (!this.token) {
               console.error('Token not found.');
               return;
@@ -155,13 +170,55 @@ export class AdminComponent {
               text: 'Your tour has been deleted.',
               icon: 'success',
             });
-          } else if (
-
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire({
               title: 'Cancelled',
               text: 'Your imaginary tour is safe :)',
+              icon: 'error',
+            });
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async deleteUser(_id: string) {
+    try {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn bg-red-500 text-white p-2 rounded-lg',
+          cancelButton: 'btn bg-green-500 text-white p-2 rounded-lg ',
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it !',
+          cancelButtonText: 'No, cancel !  ',
+          reverseButtons: true,
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            if (!this.token) {
+              console.error('Token not found.');
+              return;
+            }
+            await this.userService.deleteUserById(_id, this.token);
+            await this.fetchUsers();
+
+            swalWithBootstrapButtons.fire({
+              title: 'Deleted!',
+              text: 'the user has been deleted.',
+              icon: 'success',
+            });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+              title: 'Cancelled',
+              text: 'this user is safe :)',
               icon: 'error',
             });
           }

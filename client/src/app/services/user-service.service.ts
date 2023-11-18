@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LoginUser, ResetUser, UpdateUser, User } from '../interfaces/userInterface';
+import {
+  LoginUser,
+  ResetUser,
+  UpdateUser,
+  User,
+} from '../interfaces/userInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +13,6 @@ export class UserServiceService {
   constructor() {}
 
   private apiUrl = 'http://localhost:4000/user';
-
 
   async registerUser(userDetails: User): Promise<any> {
     const response = await fetch(`${this.apiUrl}/register`, {
@@ -26,7 +30,7 @@ export class UserServiceService {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        token: token,
       },
     });
 
@@ -37,7 +41,7 @@ export class UserServiceService {
     const response = await fetch(`${this.apiUrl}/${userId}`, {
       method: 'GET',
       headers: {
-        token : token ,
+        token: token,
       },
     });
 
@@ -61,7 +65,7 @@ export class UserServiceService {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        token : token,
+        token: token,
       },
       body: JSON.stringify(userDetails),
     });
@@ -84,7 +88,7 @@ export class UserServiceService {
     const response = await fetch(`${this.apiUrl}/check_user_details`, {
       method: 'GET',
       headers: {
-        token : token,
+        token: token,
       },
     });
 
