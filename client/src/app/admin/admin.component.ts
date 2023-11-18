@@ -15,6 +15,7 @@ import { ReviewServiceService } from '../services/review-service.service';
 })
 export class AdminComponent {
   addTourForm: FormGroup;
+  editTourForm: FormGroup;
   tours: any[] = [];
   users: any[] = [];
   bookings: any[] = [];
@@ -51,10 +52,26 @@ export class AdminComponent {
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
     });
+    this.editTourForm = this.fb.group({
+      tour_name: ['', Validators.required],
+      tour_description: ['', Validators.required],
+      tour_img: ['', Validators.required],
+      price: ['', Validators.required],
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required],
+    });
   }
 
   private initForm = () => {
     this.addTourForm = this.fb.group({
+      tour_name: ['', Validators.required],
+      tour_description: ['', Validators.required],
+      tour_img: ['', Validators.required],
+      price: ['', Validators.required],
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required],
+    });
+    this.editTourForm = this.fb.group({
       tour_name: ['', Validators.required],
       tour_description: ['', Validators.required],
       tour_img: ['', Validators.required],
@@ -72,6 +89,9 @@ export class AdminComponent {
         console.error('Token not found.');
         return;
       }
+
+      tourDetails.start_date = new Date(tourDetails.start_date);
+      tourDetails.end_date = new Date(tourDetails.end_date);
 
       this.tourService
         .createTour(tourDetails, this.token)
@@ -95,6 +115,67 @@ export class AdminComponent {
               icon: 'error',
               title: 'Please try Again',
               text: `${res.error}`,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong!',
+            icon: 'error',
+          });
+        });
+    }
+  };
+
+  editTour = (tour_id:string) => {
+    localStorage.setItem('tour_id', tour_id);
+  }
+  onEditTourSubmit = () => {
+
+    const tour_id = localStorage.getItem('tour_id');
+
+    if (this.editTourForm.valid) {
+      const tourDetails = this.editTourForm.value;
+
+      tourDetails.tour_id = tour_id;
+      tourDetails.start_date = new Date(tourDetails.start_date);
+      tourDetails.end_date = new Date(tourDetails.end_date);
+
+      // console.log(tourDetails);
+
+
+      if (!this.token) {
+        console.error('Token not found.');
+        return;
+      }
+
+      this.tourService
+        .updateTour(tourDetails, this.token)
+        .then((res) => {
+          console.log(res);
+
+          if (res.message) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Tour edited successfully!',
+              text: `${res.message}`,
+            });
+            setTimeout(() => {
+              this.initForm();
+              this.fetchTours();
+              this.router.navigate(['/admin']);
+              localStorage.removeItem('tour_id');
+            }, 5000);
+          }
+          if (res.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Please try Again',
+              text: `${res.error}`,
+
             });
           }
         })
@@ -147,7 +228,7 @@ export class AdminComponent {
     }
     try {
       this.reviews = await this.reviewService.getAllReviews(this.token);
-      console.log(this.reviews);
+      // console.log(this.reviews);
     } catch (error) {
       console.error(error);
     }

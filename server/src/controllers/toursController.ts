@@ -2,26 +2,32 @@ import { Request, Response } from "express";
 import { execute, query } from "../services/dbconnect";
 
 import { v4 as uuidv4 } from "uuid";
-import { validateTour, validateTourId, validateUpdateTour } from "../validators/tourValidator";
+import {
+  validateTour,
+  validateTourId,
+  validateUpdateTour,
+} from "../validators/tourValidator";
 import { Tour } from "../types/tourInterface";
 
 export const createTour = async (req: Request, res: Response) => {
   try {
-    const { tour_name, tour_description, tour_img, price, start_date , end_date } =
-      req.body;
+    const {
+      tour_name,
+      tour_description,
+      tour_img,
+      price,
+      start_date,
+      end_date,
+    } = req.body;
 
     // console.log(req.body);
 
     const { error } = validateTour.validate(req.body);
 
     // console.log(error);
-    
 
     if (error)
-      
-      return res
-        .status(400)
-        .send({ error: "please place correct details" });
+      return res.status(400).send({ error: "please place correct details" });
 
     const newTour: Tour = {
       tour_id: uuidv4(),
@@ -54,10 +60,14 @@ export const updateTour = async (req: Request, res: Response) => {
       start_date,
       end_date,
     } = req.body;
+    // console.log(req.body);
 
     const { error } = validateUpdateTour.validate(req.body);
+
+    console.log(error);
+
     if (error)
-      return res.status(400).send({ message: "please put correct details" });
+      return res.status(400).send({ error: "please put correct details" });
 
     const newProject: Tour = {
       tour_id,
