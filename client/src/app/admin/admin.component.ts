@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TourServiceService } from '../services/tour-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from '../services/user-service.service';
+import { BookingServiceService } from '../services/booking-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,6 +16,7 @@ export class AdminComponent {
   addTourForm: FormGroup;
   tours: any[] = [];
   users: any[] = [];
+  bookings: any[] = [];
 
   ngOnInit() {
     initTE({ Tab, Input, Modal, Ripple, Datepicker });
@@ -22,6 +24,7 @@ export class AdminComponent {
 
     this.fetchTours();
     this.fetchUsers();
+    this.fetchBookings();
   }
 
   token = localStorage.getItem('token');
@@ -30,7 +33,8 @@ export class AdminComponent {
     private fb: FormBuilder,
     private router: Router,
     private tourService: TourServiceService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private bookingService: BookingServiceService
   ) {
     if (!this.isAuthenticated()) {
       this.router.navigate(['login']);
@@ -119,11 +123,22 @@ export class AdminComponent {
     }
   };
 
-  fetchBookings = async () => {};
+  fetchBookings = async () => {
+    if (!this.token) {
+      console.error('Token not found.');
+      return;
+    }
+    try {
+      this.bookings = await this.bookingService.getAllBookings(this.token);
+      console.log(this.bookings);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   fetchReviews = async () => {};
 
-  async fetchUsers() {
+  fetchUsers = async () => {
     if (!this.token) {
       console.error('Token not found.');
       return;
@@ -131,11 +146,11 @@ export class AdminComponent {
 
     try {
       this.users = await this.userService.getAllUsers(this.token);
-      console.log(this.users);
+      // console.log(this.users);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   async deleteTour(tour_id: string) {
     try {
@@ -219,6 +234,51 @@ export class AdminComponent {
             swalWithBootstrapButtons.fire({
               title: 'Cancelled',
               text: 'this user is safe :)',
+              icon: 'error',
+            });
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async deleteBooking(booking_id: string) {
+    try {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn bg-red-500 text-white p-2 rounded-lg',
+          cancelButton: 'btn bg-green-500 text-white p-2 rounded-lg ',
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it !',
+          cancelButtonText: 'No, cancel !  ',
+          reverseButtons: true,
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            if (!this.token) {
+              console.error('Token not found.');
+              return;
+            }
+            await this.bookingService.deleteBookingById(booking_id, this.token);
+            await this.fetchUsers();
+
+            swalWithBootstrapButtons.fire({
+              title: 'Deleted!',
+              text: 'the user has been deleted.',
+              icon: 'success',
+            });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+              title: 'Cancelled',
+              text: 'this Booking is safe :)',
               icon: 'error',
             });
           }

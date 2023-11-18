@@ -371,21 +371,21 @@
                             class="text-sm font-normal px-3 py-4 whitespace-nowrap text-left"
                           >
                             <p class="mb-0.5 font-medium">
-                              {{user.email}}
+                              {{ user.email }}
                             </p>
                           </th>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left"
                           >
-
-                              <p class="mb-0.5 text-gray-500">{{user.fullName}}</p>
-
+                            <p class="mb-0.5 text-gray-500">
+                              {{ user.fullName }}
+                            </p>
                           </td>
 
                           <td
                             class="align-middle text-gray-500 text-sm font-normal px-6 py-4 whitespace-nowrap text-left"
                           >
-                            {{user.isAdmin ? 'Admin' : 'User'}}
+                            {{ user.isAdmin ? "Admin" : "User" }}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
@@ -455,12 +455,18 @@
                             Head Count
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
-                            Duration
+                            start Date
+                          </th>
+                          <th scope="col" class="text-sm font-medium px-6 py-4">
+                            End date
                           </th>
                           <th scope="col" class="text-sm font-medium px-6 py-4">
                             Total Price
                           </th>
-
+                          <th
+                            scope="col"
+                            class="rounded-tr-lg text-sm font-medium px-6 py-4"
+                          ></th>
                           <th
                             scope="col"
                             class="rounded-tr-lg text-sm font-medium px-6 py-4"
@@ -468,36 +474,62 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="border-b bg-gray-100">
+                        <tr
+                          class="border-b bg-gray-100"
+                          *ngFor="let booking of bookings"
+                        >
                           <th
                             class="text-sm font-medium px-6 py-4 whitespace-nowrap text-left"
                             scope="row"
                           >
-                            Maasai Mara Lounge
+                            {{ booking.tour_name }}
                           </th>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            5
+                            {{ booking.count }}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            5 days Starting 12/10/2023
+                            {{ booking.start_date | date }}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
                           >
-                            Ksh 400
+                            {{ booking.end_date | date }}
+                          </td>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-left text-gray-500"
+                          >
+                            {{ booking.count * booking.price }}
                           </td>
                           <td
                             class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
                           >
-                            <a
-                              href="#!"
-                              class="font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out"
-                              >Edit</a
+                            <button
+                              data-te-toggle="modal"
+                              data-te-target="#BookingsModalCenter"
+                              type="button"
+                              data-te-ripple-init
+                              data-te-ripple-color="light"
+                              class="inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                             >
+                              edit
+                            </button>
+                          </td>
+                          <td
+                            class="text-sm font-normal px-6 py-4 whitespace-nowrap text-right"
+                          >
+                            <button
+                              type="button"
+                              data-te-ripple-init
+                              data-te-ripple-color="light"
+                              (click)="deleteBooking(booking.booking_id)"
+                              class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                            >
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       </tbody>
