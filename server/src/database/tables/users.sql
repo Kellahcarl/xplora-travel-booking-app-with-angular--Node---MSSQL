@@ -8,10 +8,15 @@ CREATE  TABLE users (
 	isDeleted BIT Default 0,
 	isAdmin Bit Default 0,
 	resetPassword Bit default 0,
+	justRegistered bit default 1,
 	password varchar(250) NOT NULL,
 )
 
 DROP TABLE users
+
+alter table users
+add  justRegistered bit default 1
+
 
 
 select * from users where isAdmin = 1

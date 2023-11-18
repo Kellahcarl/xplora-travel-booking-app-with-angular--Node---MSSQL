@@ -23,10 +23,10 @@ export const Registration_run = async () => {
   const items = data.recordset;
 
   for (let item of items) {
-    let newUser :any [{first :string , email : string}] = await query(
+    let newUser = await query(
       "SELECT * from dbo.users where _id = '" + item.user_id + "'"
     );
-    newUser[0] = { first , email };
+    newUser[0] :any = { first , email };
     ejs.renderFile(
       "../templates/registerEmail.ejs",
       { name: user.first, email: user.email, password: "password" },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal, Ripple, initTE, Datetimepicker, Input } from 'tw-elements';
+import { Modal, Ripple, initTE, Datetimepicker, Input, Tab } from 'tw-elements';
 
 @Component({
   selector: 'app-user',
@@ -8,6 +8,6 @@ import { Modal, Ripple, initTE, Datetimepicker, Input } from 'tw-elements';
 })
 export class UserComponent {
   ngOnInit() {
-    initTE({ Modal, Ripple, Datetimepicker, Input });
+    initTE({ Modal, Ripple, Datetimepicker, Input, Tab });
   }
 }
