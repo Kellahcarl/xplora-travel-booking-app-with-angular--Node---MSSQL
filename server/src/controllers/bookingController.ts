@@ -55,7 +55,7 @@ export const updateBooking = async (req: Request, res: Response) => {
     console.log(error);
     
     if (error)
-      return res.status(400).send({ message: "please put correct details" });
+      return res.status(400).send({ error: "please put correct details" });
 
     const newProject: Booking = {
       booking_id,
