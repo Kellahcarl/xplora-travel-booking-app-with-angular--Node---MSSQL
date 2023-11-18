@@ -64,7 +64,7 @@ export const updateTour = async (req: Request, res: Response) => {
 
     const { error } = validateUpdateTour.validate(req.body);
 
-    console.log(error);
+    // console.log(error);
 
     if (error)
       return res.status(400).send({ error: "please put correct details" });

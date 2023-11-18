@@ -14,6 +14,7 @@ import { ReviewServiceService } from '../services/review-service.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent {
+  editUserForm: FormGroup;
   addTourForm: FormGroup;
   editTourForm: FormGroup;
   tours: any[] = [];
@@ -60,6 +61,10 @@ export class AdminComponent {
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
     });
+    this.editUserForm = this.fb.group({
+      email: ['', Validators.required],
+      fullName: ['', Validators.required],
+    });
   }
 
   private initForm = () => {
@@ -78,6 +83,10 @@ export class AdminComponent {
       price: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
+    });
+    this.editUserForm = this.fb.group({
+      email: ['', Validators.required],
+      fullName: ['', Validators.required],
     });
   };
 
@@ -130,11 +139,68 @@ export class AdminComponent {
     }
   };
 
-  editTour = (tour_id:string) => {
-    localStorage.setItem('tour_id', tour_id);
-  }
-  onEditTourSubmit = () => {
+  onEditUserSubmit = () => {
+    const user_id = localStorage.getItem('user_id');
 
+    if (this.editUserForm.valid) {
+      const userDetails = this.editUserForm.value;
+
+      userDetails.id = user_id
+
+      // console.log(userDetails);
+
+      if (!this.token) {
+        console.error('Token not found.');
+        return;
+      }
+
+      this.userService
+        .updateUser(userDetails, this.token)
+        .then((res) => {
+          console.log(res);
+
+          if (res.message) {
+            Swal.fire({
+              icon: 'success',
+              title: 'user edited successfully!',
+              text: `${res.message}`,
+            });
+            setTimeout(() => {
+              this.initForm();
+              this.fetchUsers();
+              this.router.navigate(['/admin']);
+              localStorage.removeItem('_id');
+            }, 5000);
+          }
+          if (res.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Please try Again',
+              text: `${res.error}`,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong!',
+            icon: 'error',
+          });
+        });
+    }
+  };
+
+  editUser = (user_id: string) => {
+    localStorage.setItem('user_id', user_id);
+  };
+
+  editTour = (tour_id: string) => {
+    localStorage.setItem('tour_id', tour_id);
+    this.fetchSingleTour(tour_id);
+  };
+  onEditTourSubmit = () => {
     const tour_id = localStorage.getItem('tour_id');
 
     if (this.editTourForm.valid) {
@@ -145,7 +211,6 @@ export class AdminComponent {
       tourDetails.end_date = new Date(tourDetails.end_date);
 
       // console.log(tourDetails);
-
 
       if (!this.token) {
         console.error('Token not found.');
@@ -175,7 +240,6 @@ export class AdminComponent {
               icon: 'error',
               title: 'Please try Again',
               text: `${res.error}`,
-
             });
           }
         })
@@ -189,6 +253,29 @@ export class AdminComponent {
           });
         });
     }
+  };
+
+  fetchSingleTour = async (tour_id: string) => {
+    if (!this.token || !tour_id) {
+      console.error('Token or Tour ID not found.');
+      return;
+    }
+    await this.tourService
+      .getTourById(tour_id, this.token)
+      .then((res) => {
+        // console.log(res);
+        this.editTourForm.patchValue({
+          tour_name: res.tour_name,
+          tour_description: res.tour_description,
+          tour_img: res.tour_img,
+          price: res.price,
+          start_date: res.start_date,
+          end_date: res.end_date,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   isAuthenticated = (): boolean => {
