@@ -18,11 +18,13 @@ export class NavbarComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('fullName');
     localStorage.removeItem('isAdmin');
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
     // console.log(localStorage.getItem('token'));
   };
   isAuthenticated = (): boolean => {
     const token = localStorage.getItem('token');
     return !!token;
   };
+
+  fullname = localStorage.getItem('fullName')
 }
