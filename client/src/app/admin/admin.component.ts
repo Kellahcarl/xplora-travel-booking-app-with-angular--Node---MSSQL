@@ -205,6 +205,7 @@ export class AdminComponent {
 
   editUser = (user_id: string) => {
     localStorage.setItem('user_id', user_id);
+    this.fetchSingleUser(user_id);
   };
 
   editTour = (tour_id: string) => {
@@ -222,6 +223,7 @@ export class AdminComponent {
     localStorage.setItem('user_id', user_id);
     localStorage.setItem('tour_id', tour_id);
     localStorage.setItem('price', price.toString());
+    this.fetchSingleBooking(booking_id)
   };
 
   onEditBookingSubmit = () => {
@@ -367,6 +369,45 @@ export class AdminComponent {
       });
   };
 
+  fetchSingleUser = async (user_id: string) => {
+    if (!this.token || !user_id) {
+      console.error('Token or Tour ID not found.');
+      return;
+    }
+    await this.userService
+      .getUserById(user_id, this.token)
+      .then((res) => {
+        console.log(res);
+        this.editUserForm.patchValue({
+          fullName: res.fullName,
+          email: res.email,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  fetchSingleBooking = async (booking_id: string) => {
+    if (!this.token || !booking_id) {
+      console.error('Token or Tour ID not found.');
+      return;
+    }
+    await this.bookingService
+      .getBookingById(booking_id, this.token)
+      .then((res) => {
+        // console.log(res);
+        this.editBookingForm.patchValue({
+          count: res.count,
+          start_date: res.start_date,
+          end_date: res.end_date,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   isAuthenticated = (): boolean => {
     return !!this.token;
   };
@@ -391,7 +432,7 @@ export class AdminComponent {
     }
     try {
       this.bookings = await this.bookingService.getAllBookings(this.token);
-      console.log(this.bookings);
+      // console.log(this.bookings);
     } catch (error) {
       console.error(error);
     }
