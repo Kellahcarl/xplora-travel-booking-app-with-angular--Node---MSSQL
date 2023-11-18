@@ -53,17 +53,17 @@ export class AdminComponent {
   };
 
   onAddTourSubmit = () => {
-
     if (this.addTourForm.valid) {
       const tourDetails = this.addTourForm.value;
 
-       if (!this.token) {
-         console.error('Token not found.');
-         return;
-       }
+      if (!this.token) {
+        console.error('Token not found.');
+        return;
+      }
 
-      this.tourService.createTour(tourDetails, this.token).then(
-        (res) => {
+      this.tourService
+        .createTour(tourDetails, this.token)
+        .then((res) => {
           // console.log(res);
 
           if (res.message) {
@@ -77,7 +77,6 @@ export class AdminComponent {
               this.fetchTours();
               this.router.navigate(['/admin']);
             }, 5000);
-
           }
           if (res.error) {
             Swal.fire({
@@ -85,13 +84,10 @@ export class AdminComponent {
               title: 'Please try Again',
               text: `${res.error}`,
             });
-
           }
-
-        },
-
-      ).catch((error) => {
-        console.log(error);
+        })
+        .catch((error) => {
+          console.log(error);
 
           Swal.fire({
             title: 'Error!',
@@ -124,4 +120,54 @@ export class AdminComponent {
   fetchReviews = async () => {};
 
   fetchUsers = async () => {};
+
+  async deleteTour(tour_id: string) {
+    try {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn bg-red-500 text-white p-2 rounded-lg',
+          cancelButton: 'btn bg-green-500 text-white p-2 rounded-lg ',
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it !',
+          cancelButtonText: 'No, cancel !  ',
+          reverseButtons: true,
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+
+            if (!this.token) {
+              console.error('Token not found.');
+              return;
+            }
+            await this.tourService.deleteTourById(tour_id, this.token);
+            await this.fetchTours();
+
+            swalWithBootstrapButtons.fire({
+              title: 'Deleted!',
+              text: 'Your tour has been deleted.',
+              icon: 'success',
+            });
+          } else if (
+
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire({
+              title: 'Cancelled',
+              text: 'Your imaginary tour is safe :)',
+              icon: 'error',
+            });
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
