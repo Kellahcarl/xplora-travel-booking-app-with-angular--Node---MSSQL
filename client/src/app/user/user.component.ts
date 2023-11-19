@@ -345,7 +345,7 @@ export class UserComponent {
         this.user_id,
         this.token
       );
-      console.log(this.reviews);
+      // console.log(this.reviews);
     } catch (error) {
       console.error(error);
     }
@@ -473,7 +473,7 @@ export class UserComponent {
 
       reviewDetails.reviewer_id = reviewer_id;
 
-      console.log(reviewDetails);
+      // console.log(reviewDetails);
 
       this.reviewService
         .createReview(reviewDetails, this.token)
