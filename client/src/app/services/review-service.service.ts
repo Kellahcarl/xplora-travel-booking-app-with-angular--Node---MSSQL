@@ -44,6 +44,17 @@ export class ReviewServiceService {
     return await response.json();
   }
 
+  async getUserReview(user_id: string, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/user/${user_id}`, {
+      method: 'GET',
+      headers: {
+        token: token,
+      },
+    });
+
+    return await response.json();
+  }
+
   async updateReview(reviewDetails: UpdateReview, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',

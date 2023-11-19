@@ -14,10 +14,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
+  editReviewForm: FormGroup;
   editBookingForm: FormGroup;
   addBookingForm: FormGroup;
   tours: any[] = [];
   bookings: any[] = [];
+  reviews: any[] = [];
   token = localStorage.getItem('token');
   user_id = localStorage.getItem('user_id');
 
@@ -28,6 +30,7 @@ export class UserComponent {
     this.initForm();
     this.fetchTours();
     this.fetchBookings();
+    this.fetchReviews();
   }
 
   initForm = () => {
@@ -36,6 +39,10 @@ export class UserComponent {
     });
     this.editBookingForm = this.fb.group({
       count: ['', Validators.required],
+    });
+    this.editReviewForm = this.fb.group({
+      review_content: ['', Validators.required],
+      review_rating: ['', Validators.required],
     });
   };
 
@@ -55,6 +62,10 @@ export class UserComponent {
     });
     this.editBookingForm = this.fb.group({
       count: ['', Validators.required],
+    });
+    this.editReviewForm = this.fb.group({
+      review_content: ['', Validators.required],
+      review_rating: ['', Validators.required],
     });
   }
   isAuthenticated = (): boolean => {
@@ -172,11 +183,7 @@ export class UserComponent {
       console.error(error);
     }
   };
-  editBooking = (
-    booking_id: string,
-    tour_id: string,
-    price: number
-  ) => {
+  editBooking = (booking_id: string, tour_id: string, price: number) => {
     localStorage.setItem('booking_id', booking_id);
 
     localStorage.setItem('tour_id', tour_id);
@@ -226,7 +233,6 @@ export class UserComponent {
               this.router.navigate(['/user']);
               localStorage.removeItem('booking_id');
               localStorage.removeItem('tour_id');
-
             }, 3000);
           }
           if (res.error) {
@@ -302,6 +308,130 @@ export class UserComponent {
             swalWithBootstrapButtons.fire({
               title: 'Cancelled',
               text: 'this Booking is safe :)',
+              icon: 'error',
+            });
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchReviews = async () => {
+    if (!this.token || !this.user_id) {
+      console.error('Token not found.');
+      return;
+    }
+    try {
+      this.reviews = await this.reviewService.getUserReview(
+        this.user_id,
+        this.token
+      );
+      console.log(this.reviews);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  editReview = (review_id: string, tour_id: string) => {
+    localStorage.setItem('review_id', review_id);
+    localStorage.setItem('tour_id', tour_id);
+
+    // this.fetchSingleBooking(booking_id);
+  };
+
+  onEditReviewSubmit = () => {
+    const review_id = localStorage.getItem('review_id');
+    const tour_id = localStorage.getItem('tour_id');
+    const reviewer_id = localStorage.getItem('user_id');
+
+    if (this.editReviewForm.valid) {
+      const bookingDetails = this.editReviewForm.value;
+      bookingDetails.review_id = review_id;
+      bookingDetails.tour_id = tour_id;
+      bookingDetails.reviewer_id = reviewer_id;
+
+      // console.log(bookingDetails);
+
+      if (!this.token) {
+        console.error('Token not found.');
+        return;
+      }
+
+      this.reviewService
+        .updateReview(bookingDetails, this.token)
+        .then((res) => {
+          // console.log(res);
+
+          if (res.message) {
+            Swal.fire({
+              icon: 'success',
+              title: 'review edited successfully!',
+              text: `${res.message}`,
+            });
+            setTimeout(() => {
+              this.initForm();
+              this.fetchReviews();
+              this.router.navigate(['/user']);
+              localStorage.removeItem('review_id');
+              localStorage.removeItem('tour_id');
+            }, 3000);
+          }
+          if (res.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Please try Again',
+              text: `${res.error}`,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong!',
+            icon: 'error',
+          });
+        });
+    }
+  };
+  async deleteReview(review_id: string) {
+    try {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn bg-red-500 text-white p-2 rounded-lg',
+          cancelButton: 'btn bg-green-500 text-white p-2 rounded-lg ',
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it !',
+          cancelButtonText: 'No, cancel !  ',
+          reverseButtons: true,
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            if (!this.token) {
+              console.error('Token not found.');
+              return;
+            }
+            await this.reviewService.deleteReviewById(review_id, this.token);
+            await this.fetchReviews();
+
+            swalWithBootstrapButtons.fire({
+              title: 'Deleted!',
+              text: 'the Review has been deleted.',
+              icon: 'success',
+            });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+              title: 'Cancelled',
+              text: 'this Review is safe :)',
               icon: 'error',
             });
           }

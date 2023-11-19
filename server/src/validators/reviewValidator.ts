@@ -18,3 +18,7 @@ export const validateUpdateReview = Joi.object().keys({
 export const validateReviewId = Joi.object().keys({
   review_id: Joi.string().min(8).required(),
 });
+
+export const validateUserId = Joi.object().keys({
+  user_id: Joi.string().min(8).required(),
+});

@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "tour_id": "c6c05891-5304-4b0d-abba-57ec0f199240", 
-    "reviewer_id" : "a9a5ee0b-c82a-4dfd-8245-117bc2c9fd8c", 
+    "reviewer_id" : "18ea2419-a9ac-45e4-a39f-3ed59f60ce62", 
     "review_content" : "This is the best tour I have ever been to",
     "review_rating" : "5"
 }
@@ -17,7 +17,7 @@ token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHU
 
 
 #####get one review by id
-get http://localhost:4000/review/900fb878-91c3-4b1e-8f16-615abbc385ff
+get http://localhost:4000/review/user/a9a5ee0b-c82a-4dfd-8245-117bc2c9fd8c
 token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
 
 #####update review by ID

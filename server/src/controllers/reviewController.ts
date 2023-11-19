@@ -4,7 +4,7 @@ import { execute, query } from "../services/dbconnect";
 import { v4 as uuidv4 } from "uuid";
 
 import { Review } from "../types/ReviewInterface";
-import { validateReview, validateReviewId, validateUpdateReview } from "../validators/reviewValidator";
+import { validateReview, validateReviewId, validateUpdateReview, validateUserId } from "../validators/reviewValidator";
 
 
 
@@ -81,7 +81,7 @@ export const deleteReview = async (req: Request, res: Response) => {
     if (error)
       return res
         .status(400)
-        .send({ success: false, message: "please input id" });
+        .send({ error: "please input id" });
 
     const procedureName = "deleteReview";
     await execute(procedureName, { review_id });
@@ -107,7 +107,7 @@ export const getReview = async (req: Request, res: Response) => {
     if (error)
       return res
         .status(400)
-        .send({ success: false, message: error.details[0].message });
+        .send({ error: error.details[0].message });
 
     const procedureName = "getReviewById";
     const result = await execute(procedureName, { review_id });
@@ -125,6 +125,26 @@ export const getReviews = async (req: Request, res: Response) => {
     // console.log(result.recordset);
 
     return res.json(result.recordset);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send({ message: "internal server error" });
+  }
+};
+
+export const getUserReview = async (req: Request, res: Response) => {
+  try {
+    const user_id = req.params.user_id;
+    // console.log(id);
+    if (!user_id) return res.status(400).send({ message: "Id is required" });
+
+    const { error } = validateUserId.validate(req.params);
+
+    if (error) return res.status(400).send({ error: error.details[0].message });
+
+    const procedureName = "getUserReview";
+    const result = await execute(procedureName, { user_id });
+
+    res.json(result.recordset);
   } catch (error) {
     console.log(error);
     res.status(404).send({ message: "internal server error" });
