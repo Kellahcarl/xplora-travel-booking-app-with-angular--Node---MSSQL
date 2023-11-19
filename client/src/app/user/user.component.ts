@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Modal, Ripple, initTE, Datepicker, Input, Tab } from 'tw-elements';
+import {
+  Modal,
+  Ripple,
+  initTE,
+  Datepicker,
+  Input,
+  Tab,
+  Select,
+} from 'tw-elements';
 import { ReviewServiceService } from '../services/review-service.service';
 import { TourServiceService } from '../services/tour-service.service';
 import { UserServiceService } from '../services/user-service.service';
@@ -14,6 +22,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
+  addReviewForm: FormGroup;
   editReviewForm: FormGroup;
   editBookingForm: FormGroup;
   addBookingForm: FormGroup;
@@ -26,7 +35,7 @@ export class UserComponent {
   singleTour: any[] = [];
 
   ngOnInit() {
-    initTE({ Modal, Ripple, Datepicker, Input, Tab });
+    initTE({ Modal, Ripple, Datepicker, Input, Tab, Select });
     this.initForm();
     this.fetchTours();
     this.fetchBookings();
@@ -43,6 +52,11 @@ export class UserComponent {
     this.editReviewForm = this.fb.group({
       review_content: ['', Validators.required],
       review_rating: ['', Validators.required],
+    });
+    this.addReviewForm = this.fb.group({
+      review_content: ['', Validators.required],
+      review_rating: ['', Validators.required],
+      tour_id: ['', Validators.required],
     });
   };
 
@@ -66,6 +80,11 @@ export class UserComponent {
     this.editReviewForm = this.fb.group({
       review_content: ['', Validators.required],
       review_rating: ['', Validators.required],
+    });
+    this.addReviewForm = this.fb.group({
+      review_content: ['', Validators.required],
+      review_rating: ['', Validators.required],
+      tour_id: ['', Validators.required],
     });
   }
   isAuthenticated = (): boolean => {
@@ -440,4 +459,56 @@ export class UserComponent {
       console.error(error);
     }
   }
+
+  onAddReviewSubmit = () => {
+    const reviewer_id = localStorage.getItem('user_id');
+
+    if (this.addReviewForm.valid) {
+      const reviewDetails = this.addReviewForm.value;
+
+      if (!this.token) {
+        console.error('Token not found.');
+        return;
+      }
+
+      reviewDetails.reviewer_id = reviewer_id;
+
+      console.log(reviewDetails);
+
+      this.reviewService
+        .createReview(reviewDetails, this.token)
+        .then((res) => {
+          // console.log(res);
+
+          if (res.message) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Review created successfully!',
+              text: `${res.message}`,
+            });
+            setTimeout(() => {
+              this.initForm();
+              this.fetchReviews();
+              this.router.navigate(['/user']);
+            }, 3000);
+          }
+          if (res.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Please try Again',
+              text: `${res.error}`,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong!',
+            icon: 'error',
+          });
+        });
+    }
+  };
 }

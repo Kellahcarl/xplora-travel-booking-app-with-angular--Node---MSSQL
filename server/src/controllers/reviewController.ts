@@ -20,7 +20,7 @@ export const createReview = async (req: Request, res: Response) => {
     if (error)
       return res
         .status(400)
-        .send({ success: false, message: "please place correct details" });
+        .send({ error: "please place correct details" });
 
     const newReview: Review = {
       review_id: uuidv4(),
@@ -47,7 +47,7 @@ export const updateReview = async (req: Request, res: Response) => {
 
     const { error } = validateUpdateReview.validate(req.body);
     if (error)
-      return res.status(400).send({ message: "please put correct details" });
+      return res.status(400).send({ error: "please put correct details" });
 
     const newProject: Review = {
       review_id,
@@ -127,7 +127,7 @@ export const getReviews = async (req: Request, res: Response) => {
     return res.json(result.recordset);
   } catch (error) {
     console.log(error);
-    res.status(404).send({ message: "internal server error" });
+    res.status(404).send({error : "internal server error" });
   }
 };
 
@@ -135,7 +135,7 @@ export const getUserReview = async (req: Request, res: Response) => {
   try {
     const user_id = req.params.user_id;
     // console.log(id);
-    if (!user_id) return res.status(400).send({ message: "Id is required" });
+    if (!user_id) return res.status(400).send({ error: "Id is required" });
 
     const { error } = validateUserId.validate(req.params);
 
@@ -147,6 +147,6 @@ export const getUserReview = async (req: Request, res: Response) => {
     res.json(result.recordset);
   } catch (error) {
     console.log(error);
-    res.status(404).send({ message: "internal server error" });
+    res.status(404).send({ error: "internal server error" });
   }
 };
