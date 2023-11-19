@@ -9,7 +9,10 @@ export class BookingServiceService {
 
   private apiUrl = 'http://localhost:4000/booking';
 
-  async createBooking(bookingDetails: CreateBooking, token: string): Promise<any> {
+  async createBooking(
+    bookingDetails: CreateBooking,
+    token: string
+  ): Promise<any> {
     const response = await fetch(`${this.apiUrl}/`, {
       method: 'POST',
       headers: {
@@ -44,7 +47,21 @@ export class BookingServiceService {
     return await response.json();
   }
 
-  async updateBooking(bookingDetails: UpdateBooking, token: string): Promise<any> {
+  async getUserBookings(user_Id: string, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/user/${user_Id}`, {
+      method: 'GET',
+      headers: {
+        token: token,
+      },
+    });
+
+    return await response.json();
+  }
+
+  async updateBooking(
+    bookingDetails: UpdateBooking,
+    token: string
+  ): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',
       headers: {

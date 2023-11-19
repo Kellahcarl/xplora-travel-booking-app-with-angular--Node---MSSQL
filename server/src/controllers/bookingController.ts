@@ -2,22 +2,24 @@ import { Request, Response } from "express";
 import { execute, query } from "../services/dbconnect";
 
 import { v4 as uuidv4 } from "uuid";
-import { validateBooking, validateBookingId, validateUpdateBooking } from "../validators/bookingValidator";
-import { Booking,} from "../types/bookingInterface";
+import {
+  validateBooking,
+  validateBookingId,
+  validateUpdateBooking,
+  validateUserId,
+} from "../validators/bookingValidator";
+import { Booking } from "../types/bookingInterface";
 
 export const createBooking = async (req: Request, res: Response) => {
   try {
-    const { tour_id, user_id, count, total_price, start_date, end_date } =
-      req.body;
+    const { tour_id, user_id, count, total_price } = req.body;
 
     // console.log(req.body);
 
     const { error } = validateBooking.validate(req.body);
 
     if (error)
-      return res
-        .status(400)
-        .send({ success: false, message: "please place correct details" });
+      return res.status(400).send({ error: "please place correct details" });
 
     const newBooking: Booking = {
       booking_id: uuidv4(),
@@ -25,8 +27,6 @@ export const createBooking = async (req: Request, res: Response) => {
       user_id,
       count,
       total_price,
-      start_date,
-      end_date,
     };
 
     const procedure = "createBooking";
@@ -46,14 +46,13 @@ export const updateBooking = async (req: Request, res: Response) => {
       tour_id,
       user_id,
       count,
-      total_price,
-      start_date,
-      end_date,
+      total_price
+  
     } = req.body;
 
     const { error } = validateUpdateBooking.validate(req.body);
-    console.log(error);
-    
+    // console.log(error);
+
     if (error)
       return res.status(400).send({ error: "please put correct details" });
 
@@ -63,8 +62,7 @@ export const updateBooking = async (req: Request, res: Response) => {
       user_id,
       count,
       total_price,
-      start_date,
-      end_date,
+     
     };
 
     const ProcedureName = "updateBooking";
@@ -117,7 +115,7 @@ export const getBooking = async (req: Request, res: Response) => {
     if (error)
       return res
         .status(400)
-        .send({ success: false, message: error.details[0].message });
+        .send({ error: error.details[0].message });
 
     const procedureName = "getBookingById";
     const result = await execute(procedureName, { booking_id });
@@ -135,6 +133,30 @@ export const getBookings = async (req: Request, res: Response) => {
     // console.log(result.recordset);
 
     return res.json(result.recordset);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send({ message: "internal server error" });
+  }
+};
+
+
+export const getUserBookings = async (req: Request, res: Response) => {
+  try {
+    const user_id = req.params.user_id;
+    // console.log(user_id);
+    if (!user_id) return res.status(400).send({ message: "Id is required" });
+
+    const { error } = validateUserId.validate(req.params);
+
+    if (error)
+      return res
+        .status(400)
+        .send({ error: error.details[0].message });
+
+    const procedureName = "getUserBookings";
+    const result = await execute(procedureName, { user_id });
+
+    res.json(result.recordset);
   } catch (error) {
     console.log(error);
     res.status(404).send({ message: "internal server error" });

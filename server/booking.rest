@@ -1,26 +1,29 @@
 ####create a booking
 post http://localhost:4000/booking/
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MTYzMTcsImV4cCI6MTcwMDUwMjcxN30.iQYxbGsOkI0ZErA5dgpCUbQJ8TGIdRffGgyGg5AgxLU
 Content-Type: application/json
 
 {
     "tour_id": "c6c05891-5304-4b0d-abba-57ec0f199240", 
     "user_id" : "a9a5ee0b-c82a-4dfd-8245-117bc2c9fd8c", 
     "count": "5", 
-    "total_price" : "210000",
-       "start_date": "12/11/2023",
-        "end_date" : "12/11/2023"
+    "total_price" : "210000"
+     
 }
 
 #####get all bookings
 
 get http://localhost:4000/booking/
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MTYzMTcsImV4cCI6MTcwMDUwMjcxN30.iQYxbGsOkI0ZErA5dgpCUbQJ8TGIdRffGgyGg5AgxLU
 
 
 #####get one booking by id
-get http://localhost:4000/booking/1519f731-53d9-4fcd-ba89-75eb9d67dee2
-token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAxNTE2MDcsImV4cCI6MTcwMDIzODAwN30.PMFR4ZhC1vWrvbmfwmz3fR86_dsVTC6Seb7yF2GSZjs
+get http://localhost:4000/booking/0c23edbe-c7e2-43e4-b157-7931a933a7cf
+token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MTYzMTcsImV4cCI6MTcwMDUwMjcxN30.iQYxbGsOkI0ZErA5dgpCUbQJ8TGIdRffGgyGg5AgxLU
+
+#####get user bookings by id
+get http://localhost:4000/booking/user/a9a5ee0b-c82a-4dfd-8245-117bc2c9fd8c
+token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MTYzMTcsImV4cCI6MTcwMDUwMjcxN30.iQYxbGsOkI0ZErA5dgpCUbQJ8TGIdRffGgyGg5AgxLU
 
 #####update booking by ID
 
@@ -34,8 +37,7 @@ Content-Type: application/json
     "user_id" : "a9a5ee0b-c82a-4dfd-8245-117bc2c9fd8c", 
     "count": "4", 
     "total_price" : "210000",
-       "start_date": "12/11/2023",
-        "end_date" : "12/11/2023"
+     
 }
 
 

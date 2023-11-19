@@ -44,7 +44,7 @@ export class AdminComponent {
     private bookingService: BookingServiceService
   ) {
     if (!this.isAuthenticated()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }
     this.addTourForm = this.fb.group({
       tour_name: ['', Validators.required],
@@ -68,8 +68,6 @@ export class AdminComponent {
     });
     this.editBookingForm = this.fb.group({
       count: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
     });
   }
 
@@ -96,8 +94,7 @@ export class AdminComponent {
     });
     this.editBookingForm = this.fb.group({
       count: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
+
     });
   };
 
@@ -236,8 +233,7 @@ export class AdminComponent {
       const bookingDetails = this.editBookingForm.value;
 
       bookingDetails.booking_id = booking_id;
-      bookingDetails.start_date = new Date(bookingDetails.start_date);
-      bookingDetails.end_date = new Date(bookingDetails.end_date);
+
       bookingDetails.tour_id = tour_id;
       bookingDetails.user_id = user_id;
 
@@ -270,7 +266,7 @@ export class AdminComponent {
               localStorage.removeItem('booking_id');
               localStorage.removeItem('tour_id');
               localStorage.removeItem('user_id');
-            }, 5000);
+            }, 3000);
           }
           if (res.error) {
             Swal.fire({
@@ -291,6 +287,7 @@ export class AdminComponent {
         });
     }
   };
+
   onEditTourSubmit = () => {
     const tour_id = localStorage.getItem('tour_id');
 
@@ -399,8 +396,7 @@ export class AdminComponent {
         // console.log(res);
         this.editBookingForm.patchValue({
           count: res.count,
-          start_date: res.start_date,
-          end_date: res.end_date,
+
         });
       })
       .catch((error) => {
@@ -581,11 +577,11 @@ export class AdminComponent {
               return;
             }
             await this.bookingService.deleteBookingById(booking_id, this.token);
-            await this.fetchUsers();
+            await this.fetchBookings();
 
             swalWithBootstrapButtons.fire({
               title: 'Deleted!',
-              text: 'the user has been deleted.',
+              text: 'the Booking has been deleted.',
               icon: 'success',
             });
           } else if (result.dismiss === Swal.DismissReason.cancel) {

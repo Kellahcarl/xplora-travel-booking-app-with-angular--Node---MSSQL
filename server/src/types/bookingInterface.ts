@@ -4,6 +4,5 @@ export interface Booking {
   user_id: string;
   count: string;
   total_price: number;
-  start_date: Date;
-  end_date: Date;
+  
 }

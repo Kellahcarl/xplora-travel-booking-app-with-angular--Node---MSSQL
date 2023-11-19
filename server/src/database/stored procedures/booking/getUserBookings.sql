@@ -1,5 +1,10 @@
-CREATE or alter PROCEDURE getBookings
-AS
+CREATE or alter PROCEDURE [dbo].[getUserBookings]
+	@user_id VARCHAR(100)
+as
+
+set nocount on;
+
+
 BEGIN
     SELECT
         b.booking_id,
@@ -7,8 +12,10 @@ BEGIN
         b.user_id,
         b.count,
         b.total_price,
-       
+        
         u.fullName as userFullName,
+        u.email as userEmail,
+        u.imageUrl as userImageUrl,
         t.tour_name,
         t.tour_description,
         t.tour_img,
@@ -22,5 +29,6 @@ BEGIN
     INNER JOIN
         tours t ON b.tour_id = t.tour_id
     WHERE
-        b.isDeleted = 0; -- Exclude deleted bookings if any
+        b.user_id = @user_id
+        AND b.isDeleted = 0; -- Exclude deleted bookings if any
 END;

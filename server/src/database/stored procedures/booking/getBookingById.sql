@@ -12,8 +12,7 @@ BEGIN
         b.user_id,
         b.count,
         b.total_price,
-        b.start_date,
-        b.end_date,
+        
         u.fullName as userFullName,
         u.email as userEmail,
         u.imageUrl as userImageUrl,
