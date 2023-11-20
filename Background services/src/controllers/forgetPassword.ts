@@ -8,7 +8,7 @@ import { query } from "../services/dbconnect";
 dotenv.config();
 
 export const forgetPassword = async () => {
-  const users = (await query("SELECT * FROM users WHERE isDeleted = 1"))
+  const users = (await query("SELECT * FROM users WHERE resetPassword = 1"))
     .recordset;
 
   console.log(users);
@@ -28,7 +28,7 @@ export const forgetPassword = async () => {
         try {
           await sendMail(mailOptions);
 
-          await query("UPDATE users SET isDeleted = 0 WHERE isDeleted = 1");
+          await query("UPDATE users SET resetPassword = 0 WHERE resetPassword = 1");
 
           console.log("Emails send to poople who forgot passwords users");
         } catch (error) {
