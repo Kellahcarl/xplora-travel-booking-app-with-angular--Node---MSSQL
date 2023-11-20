@@ -227,10 +227,11 @@ export const resetPassword = async (req: Request, res: Response) => {
 export const forgotPassword = async (req: Request, res: Response) => {
   try {
     const { id, password } = req.body;
+    // console.log(req.body);
 
-    if (!id) return res.status(400).send({ message: "id is required" });
+    if (!id) return res.status(400).send({ error: "id is required" });
     if (!password)
-      return res.status(400).send({ message: "password is required" });
+      return res.status(400).send({ error: "password is required" });
 
     const { error } = validateResetpassword.validate(req.body);
 

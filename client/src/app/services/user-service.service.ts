@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { user } from '../../../../server/src/types/userInterfaces';
 import {
   LoginUser,
   ResetUser,
@@ -74,7 +75,6 @@ export class UserServiceService {
     return await response.json();
   }
 
-
   async updateUserImage(userDetails: userImage, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}/profile`, {
       method: 'POST',
@@ -110,13 +110,13 @@ export class UserServiceService {
     return await response.json();
   }
 
-  async forgotPassword(email: string): Promise<any> {
+  async forgotPassword(userdetails: any): Promise<any> {
     const response = await fetch(`${this.apiUrl}/forgot`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify(userdetails),
     });
 
     return await response.json();

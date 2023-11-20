@@ -9,7 +9,7 @@ import cron from "node-cron";
 
 import dotenv from "dotenv";
 import cors from "cors";
-import { Registration_run } from "./controllers/registration";
+
 import { welcomeUser } from "./controllers/WelcomeUser";
 import { forgetPassword } from "./controllers/forgetPassword";
 dotenv.config();
@@ -20,9 +20,7 @@ app.use(json());
 app.use(cors());
 
 const run = async (): Promise<void> => {
-  // cron.schedule("2 * * * * *", async () => {
-  //   await Registration_run();
-  // });
+
   cron.schedule("*/10 * * * * *", async () => {
     console.log("Checking for a new user");
 
@@ -35,12 +33,7 @@ const run = async (): Promise<void> => {
     await forgetPassword()
   })
 
-  //   cron.schedule("2 * * * * *", async () => {
-  //     await projectAssign.run();
-  //   });
-  // cron.schedule("2 * * * * *", async () => {
-  //   await taskAssign.run();
-  // });
+
 };
 
 run();

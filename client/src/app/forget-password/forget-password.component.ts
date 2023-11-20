@@ -47,6 +47,9 @@ export class ForgetPasswordComponent {
   }
 
   onSubmit() {
+
+    // console.log(this.forgetPasswordForm.value);
+
     if (this.forgetPasswordForm.valid) {
 
       const { confirmPassword, ...userDetails } = this.forgetPasswordForm.value;
