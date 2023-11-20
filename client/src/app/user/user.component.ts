@@ -15,11 +15,13 @@ import { TourServiceService } from '../services/tour-service.service';
 import { UserServiceService } from '../services/user-service.service';
 import { BookingServiceService } from '../services/booking-service.service';
 import Swal from 'sweetalert2';
+import { CustomFilterPipe } from '../pipes/custom-filter.pipe';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
+
 })
 export class UserComponent {
   addReviewForm: FormGroup;
@@ -31,6 +33,7 @@ export class UserComponent {
   reviews: any[] = [];
   token = localStorage.getItem('token');
   user_id = localStorage.getItem('user_id');
+  searchText =''
 
   singleTour: any[] = [];
 
@@ -97,7 +100,7 @@ export class UserComponent {
     }
     try {
       this.tours = await this.tourService.getAllTours(this.token);
-      // console.log(this.tours);
+      console.log(this.tours);
     } catch (error) {
       console.error(error);
     }

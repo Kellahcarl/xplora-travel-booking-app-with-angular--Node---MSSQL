@@ -10,6 +10,7 @@ import cron from "node-cron";
 import dotenv from "dotenv";
 import cors from "cors";
 import { Registration_run } from "./controllers/registration";
+import { welcomeUser } from "./controllers/WelcomeUser";
 dotenv.config();
 
 const app = express();
@@ -18,8 +19,13 @@ app.use(json());
 app.use(cors());
 
 const run = async (): Promise<void> => {
-  cron.schedule("2 * * * * *", async () => {
-    await Registration_run();
+  // cron.schedule("2 * * * * *", async () => {
+  //   await Registration_run();
+  // });
+  cron.schedule("*/10 * * * * *", async () => {
+    console.log("Checking for a new user");
+
+    await welcomeUser();
   });
 
   //   cron.schedule("2 * * * * *", async () => {
@@ -47,5 +53,5 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.SERVER_PORT || 5021;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Mail server up and running on port ${PORT}`);
 });

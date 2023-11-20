@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LandingComponent } from './landing/landing.component';
 import { CommonModule } from '@angular/common';
+import { CustomFilterPipe } from './pipes/custom-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,9 @@ import { CommonModule } from '@angular/common';
     NavbarComponent,
     ProfileComponent,
     LandingComponent,
+    CustomFilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule,CommonModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule,CommonModule,FormsModule,],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -27,8 +27,14 @@ const defaultConfig: mail_configs = {
   },
 };
 
-export const sendMail = async (email: Email) => {
+export const sendMail = async (messageOption: any) => {
   const transporter = createTransporter(defaultConfig);
   await transporter.verify();
-  await transporter.sendMail(email);
+  await transporter.sendMail(messageOption, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(info.response);
+    }
+  });
 };

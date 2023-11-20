@@ -26,36 +26,36 @@ export const Registration_run = async () => {
     let newUser = await query(
       "SELECT * from dbo.users where _id = '" + item.user_id + "'"
     );
-    newUser[0] :any = { first , email };
-    ejs.renderFile(
-      "../templates/registerEmail.ejs",
-      { name: user.first, email: user.email, password: "password" },
-      async (err: Error, data: string) => {
-        if (err) return console.log(err);
-        const message = {
-          from: {
-            name: "User System",
-            address: process.env.FROM_EMAIL,
-          },
-          to: user.email,
-          subject: "Registration Success",
-          html: data,
-        };
-        try {
-          if (item.active) {
-            await sendMail(message);
-            await query(
-              "UPDATE dbo.registrationQueue set active = 0 where id = '" +
-                item.id +
-                "'"
-            );
-            console.log(`Registration Email sent to ${user.email}`);
-          }
-        } catch (error) {
-          console.log((error as Error).message);
-          console.log(`Couldn't send email to ${user.email}`);
-        }
-      }
-    );
+    // newUser[0] :any = { first , email };
+    // ejs.renderFile(
+    //   "../templates/registerEmail.ejs",
+    //   { name: user.first, email: user.email, password: "password" },
+    //   async (err: Error, data: string) => {
+    //     if (err) return console.log(err);
+    //     const message = {
+    //       from: {
+    //         name: "User System",
+    //         address: process.env.FROM_EMAIL,
+    //       },
+    //       to: user.email,
+    //       subject: "Registration Success",
+    //       html: data,
+    //     };
+    //     try {
+    //       if (item.active) {
+    //         await sendMail(message);
+    //         await query(
+    //           "UPDATE dbo.registrationQueue set active = 0 where id = '" +
+    //             item.id +
+    //             "'"
+    //         );
+    //         console.log(`Registration Email sent to ${user.email}`);
+    //       }
+    //     } catch (error) {
+    //       console.log((error as Error).message);
+    //       console.log(`Couldn't send email to ${user.email}`);
+    //     }
+    //   }
+    // );
   }
 };

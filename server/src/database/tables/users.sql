@@ -17,6 +17,8 @@ DROP TABLE users
 alter table users
 add  justRegistered bit default 1
 
+UPDATE users SET justRegistered = 1 WHERE justRegistered = 0
+
 
 
 select * from users where isAdmin = 1
