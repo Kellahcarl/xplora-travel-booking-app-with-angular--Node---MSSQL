@@ -54,7 +54,7 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registrationForm.valid) {
       const { confirmPassword, ...userDetails } = this.registrationForm.value;
-      console.log(userDetails);
+      // console.log(userDetails);
 
       // Call your user service to register the user
       this.userService

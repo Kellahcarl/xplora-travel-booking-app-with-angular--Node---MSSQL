@@ -13,7 +13,7 @@ export const createReview = async (req: Request, res: Response) => {
     const { tour_id, reviewer_id, review_content ,review_rating } =
       req.body;
 
-    // console.log(req.body);
+    console.log(req.body);
 
     const { error } = validateReview.validate(req.body);
 
