@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { Registration_run } from "./controllers/registration";
 import { welcomeUser } from "./controllers/WelcomeUser";
+import { forgetPassword } from "./controllers/forgetPassword";
 dotenv.config();
 
 const app = express();
@@ -27,6 +28,12 @@ const run = async (): Promise<void> => {
 
     await welcomeUser();
   });
+
+  cron.schedule("*/10 * * * * * *", async () => {
+    console.log("Checking for a person who forgot password");
+
+    await forgetPassword()
+  })
 
   //   cron.schedule("2 * * * * *", async () => {
   //     await projectAssign.run();

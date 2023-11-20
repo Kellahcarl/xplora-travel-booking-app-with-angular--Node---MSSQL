@@ -23,6 +23,6 @@ UPDATE users SET justRegistered = 1 WHERE justRegistered = 0
 
 select * from users where isAdmin = 1
 
-update users set isAdmin = 1 where email = 'caleb.kellah@thejitu.com'
+update users set isAdmin = 1 where email = 'bcaleb98@gmail.com'
 
 create database PMS

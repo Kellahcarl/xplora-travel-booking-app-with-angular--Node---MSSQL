@@ -100,7 +100,7 @@ export class UserComponent {
     }
     try {
       this.tours = await this.tourService.getAllTours(this.token);
-      console.log(this.tours);
+      // console.log(this.tours);
     } catch (error) {
       console.error(error);
     }
