@@ -37,7 +37,7 @@ export class LoginComponent {
       .loginUser(this.loginForm.value)
       .then((response) => {
         // Handle successful login
-        console.log(response);
+        // console.log(response);
 
         if (response.message) {
           if (response.token) {
@@ -51,7 +51,7 @@ export class LoginComponent {
           });
 
           this.loginService.checkUserDetails(response.token).then((data) => {
-            console.log(data);
+            // console.log(data);
 
             if ('info' in data) {
               if (data.info.isAdmin === true) {

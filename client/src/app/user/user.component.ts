@@ -69,7 +69,7 @@ export class UserComponent {
     private bookingService: BookingServiceService
   ) {
     if (!this.isAuthenticated()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }
     this.addBookingForm = this.fb.group({
       count: ['', Validators.required],

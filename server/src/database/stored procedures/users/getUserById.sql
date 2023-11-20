@@ -8,7 +8,8 @@ begin
 	select	_id,
 			email,
 			fullName,
-			isAdmin
+			isAdmin,
+			imageUrl
 		
 	from	users  where _id= @id and isDeleted = 0;
 end;

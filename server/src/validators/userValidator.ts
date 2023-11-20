@@ -22,6 +22,10 @@ export const validateRegisterUser = Joi.object().keys({
 export const validateUserEmail = Joi.object().keys({
   email: Joi.string().email().required(),
 });
+export const validateImageUrl = Joi.object().keys({
+  imageUrl: Joi.string().min(5).required(),
+  user_id : Joi.string().min(8).required(),
+});
 
 export const validateUpdateuser = Joi.object().keys({
   fullName: Joi.string().required(),

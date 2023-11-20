@@ -9,6 +9,7 @@ import {
   registerUser,
   resetPassword,
   updateUser,
+  updateUserProfile,
 } from "../controllers/userController";
 import { verifyToken } from "../middleware/verifyToken";
 
@@ -18,6 +19,7 @@ user_router.post("/register", registerUser);
 user_router.post("/login", loginUser);
 user_router.post("/forgot", forgotPassword);
 user_router.post("/reset", resetPassword);
+user_router.post("/profile", updateUserProfile);
 
 user_router.get("/", verifyToken, getUsers);
 user_router.put("/", verifyToken, updateUser);

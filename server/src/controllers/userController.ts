@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ExtendedUser, updatUser, user } from "../types/userInterfaces";
 import { generateToken } from "../services/tokenGenerator";
 import {
+  validateImageUrl,
   validateLoginUser,
   validateRegisterUser,
   validateResetpassword,
@@ -273,6 +274,33 @@ export const checkUserDetails = async (request: any, res: Response) => {
   if (request.info) {
     return res.json({
       info: request.info,
+    });
+  }
+};
+
+export const updateUserProfile = async (req: Request, res: Response) => {
+  try {
+    const { imageUrl, user_id } = req.body;
+
+    const { error } = validateImageUrl.validate(req.body);
+    if (error)
+      return res
+        .status(400)
+        .send({ error: "check image & user ID if they are correct" });
+
+    const procedureName = "updateUserImage";
+    const params = {
+      imageUrl,
+      user_id,
+    };
+
+    await execute(procedureName, params);
+    return res.send({ message: "User profile updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: (error as Error).message,
+      message: "Internal Sever Error",
     });
   }
 };

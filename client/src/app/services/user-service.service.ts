@@ -4,6 +4,7 @@ import {
   ResetUser,
   UpdateUser,
   User,
+  userImage,
 } from '../interfaces/userInterface';
 
 @Injectable({
@@ -63,6 +64,20 @@ export class UserServiceService {
   async updateUser(userDetails: UpdateUser, token: string): Promise<any> {
     const response = await fetch(`${this.apiUrl}`, {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+      body: JSON.stringify(userDetails),
+    });
+
+    return await response.json();
+  }
+
+
+  async updateUserImage(userDetails: userImage, token: string): Promise<any> {
+    const response = await fetch(`${this.apiUrl}/profile`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         token: token,

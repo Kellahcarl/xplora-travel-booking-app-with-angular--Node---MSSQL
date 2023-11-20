@@ -11,7 +11,7 @@ Content-Type: application/json
 #####get all users
 
 get http://localhost:4000/user
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MzIzNTcsImV4cCI6MTcwMDUxODc1N30.wUxqgPQ-I8h9Aa0v5zX5RVTEtv4j1_tDpZfh7J64Unw
 
 
 #####get one user by id
@@ -31,7 +31,7 @@ Content-Type: application/json
 #####update user
 
 put http://localhost:4000/user
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6IjFmYzNiYzkwLWRjMjctNDFmOC05MDgwLWUxY2VkN2E4MzYyZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDAwMzYyODIsImV4cCI6MTcwMDEyMjY4Mn0.3fh_c9gfiklWZXLRCOFDl_RcVg3MrsLbUG4hk3yP1Mo
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MzIzNTcsImV4cCI6MTcwMDUxODc1N30.wUxqgPQ-I8h9Aa0v5zX5RVTEtv4j1_tDpZfh7J64Unw
 Content-Type: application/json
 
 {
@@ -40,6 +40,16 @@ Content-Type: application/json
     "email":"mogutu@thejitu.com"
 }
 
+#####update user image
+
+post http://localhost:4000/user/profile
+token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6InN5bHZpYSBNb2d1dHUiLCJlbWFpbCI6InNpbHZpYTNAdGhlaml0dS5jb20iLCJpZCI6ImE5YTVlZTBiLWM4MmEtNGRmZC04MjQ1LTExN2JjMmM5ZmQ4YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDA0MzIzNTcsImV4cCI6MTcwMDUxODc1N30.wUxqgPQ-I8h9Aa0v5zX5RVTEtv4j1_tDpZfh7J64Unw
+Content-Type: application/json
+
+{
+    "user_id":"15b33325-2afb-47cb-8c3c-b216eab706c7",
+    "imageUrl": "mogutu"    
+}
 
 ##### delete user by ID
 delete http://localhost:4000/user/1fc3bc90-dc27-41f8-9080-e1ced7a8362e

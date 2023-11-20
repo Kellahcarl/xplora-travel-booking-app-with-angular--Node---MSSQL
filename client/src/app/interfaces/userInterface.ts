@@ -24,3 +24,8 @@ export interface LoginUser {
   email: string;
   password: string;
 }
+
+export interface userImage {
+  imageUrl: string;
+  user_id : string;
+}
