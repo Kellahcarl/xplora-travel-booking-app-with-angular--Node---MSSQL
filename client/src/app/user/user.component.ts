@@ -15,7 +15,7 @@ import { TourServiceService } from '../services/tour-service.service';
 import { UserServiceService } from '../services/user-service.service';
 import { BookingServiceService } from '../services/booking-service.service';
 import Swal from 'sweetalert2';
-import { CustomFilterPipe } from '../pipes/custom-filter.pipe';
+
 
 @Component({
   selector: 'app-user',

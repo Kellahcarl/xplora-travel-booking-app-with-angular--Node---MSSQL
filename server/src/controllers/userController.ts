@@ -68,7 +68,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const result = await execute(procedure1, { email });
 
     const userWithEmail = result.recordset[0];
-    console.log(userWithEmail);
+    // console.log(userWithEmail);
 
     if (userWithEmail)
       return res
