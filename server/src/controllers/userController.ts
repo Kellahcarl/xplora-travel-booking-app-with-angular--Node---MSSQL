@@ -57,7 +57,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const { error } = validateRegisterUser.validate(req.body);
 
     if (error)
-      return res.status(400).send({
+      return res.status(400).json({
         error:
           "check email or password should be atleast 8 characters long with letters symbols and uppercase",
       });
@@ -67,13 +67,18 @@ export const registerUser = async (req: Request, res: Response) => {
     const procedure1 = "getUserByEmail";
     const result = await execute(procedure1, { email });
 
-    const userWithEmail = result.recordset[0];
-    // console.log(userWithEmail);
+    const userWithEmail =
+      result.recordset && result.recordset.length > 0
+        ? result.recordset[0]
+        : undefined;
 
-    if (userWithEmail)
+    if (userWithEmail) {
       return res
         .status(404)
-        .send({ error: "Account exists with the given email" });
+        .json({ error: "Account exists with the given email" });
+    }
+
+    // console.log(userWithEmail);
 
     const newUser: user = {
       id: uuidv4(),
@@ -88,10 +93,10 @@ export const registerUser = async (req: Request, res: Response) => {
 
     await execute(procedureName, params);
 
-    return res.send({ message: "User registered succesfully" });
+    return res.status(200).json({ message: "User registered successfully" });
   } catch (error) {
     console.log(error);
-    res.send({ error: (error as Error).message });
+    res.json({ error: (error as Error).message });
   }
 };
 
@@ -103,10 +108,9 @@ export const loginUser = async (req: Request, res: Response) => {
     const { error } = validateLoginUser.validate(req.body);
 
     if (error)
-      return res.status(400).send({
-        success: false,
+      return res.status(400).json({
         error:
-          "password should be atleast 8 characters long <br> with letters symbols and uppercase",
+          "please check if entered password and email are correct",
       });
 
     const result = await execute(procedureName, { email });
@@ -115,13 +119,13 @@ export const loginUser = async (req: Request, res: Response) => {
       const user = recordset[0];
 
       if (!user) {
-        return res.status(404).send({ error: "Account does not exist" });
+        return res.status(404).json({ error: "Account does not exist" });
       }
 
       const validPassword = await comparePass(password, user.password);
 
       if (!validPassword) {
-        return res.status(404).send({ error: "Invalid password" });
+        return res.status(404).json({ error: "Invalid password" });
       }
 
       const token = generateToken(
@@ -130,12 +134,12 @@ export const loginUser = async (req: Request, res: Response) => {
         user.fullName,
         user.isAdmin
       );
-      return res.send({
+      return res.status(200).json({
         message: "Logged in successfully",
         token,
       });
     } else {
-      return res.status(404).send({ message: "Account does not exist" });
+      return res.status(404).json({ message: "Account does not exist" });
     }
   } catch (error) {
     console.log(error);
